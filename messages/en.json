@@ -1,0 +1,305 @@
+{
+    "appHeader": {
+        "userProfile": "{name}'s Profile",
+        "logout": "Logout"
+    },
+    "navigation": {
+        "dashboard": "Dashboard",
+        "check-in": "Check-in",
+        "create-event": "Create Event",
+        "my-events": "My Events",
+        "balance": "Balance",
+        "events": "Events",
+        "users": "Users",
+        "payments": "Payments",
+        "roles": "Roles",
+        "permissions": "Permissions",
+        "profile": "Profile",
+        "admin": "Admin"
+    },
+    "breadcrumbs": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "roles": "Roles",
+        "permissions": "Permissions",
+        "me": "Profile",
+        "create": "Create",
+        "edit": "Edit",
+        "view": "View"
+    },
+    "profile": {
+        "title": "Profile",
+        "description": "Manage your profile information and preferences.",
+        "actions": {
+            "title": "User Actions",
+            "updateUserDetails": "Update User Details",
+            "changePassword": "Change Password",
+            "updatePreferences": "Update Preferences",
+            "updateAvatar": "Update Avatar"
+        },
+        "auditLogs": {
+            "title": "My Audit Logs",
+            "description": "You can see the last 30 actions you have performed",
+            "headers": {
+                "date": "Date",
+                "description": "Description"
+            }
+        },
+        "changeUserInfos": {
+            "title": "Update User Infos",
+            "description": "You are updating your user infos.",
+            "loading": "Updating...",
+            "cancel": "Cancel",
+            "save": "Save",
+            "successTitle": "Woohoo!",
+            "successMessage": "Your user infos have been updated successfully.",
+            "errorTitle": "Error",
+            "errorGeneric": "An error occurred while updating your user infos. Please try again.",
+            "name": {
+                "label": "Name",
+                "placeholder": "Enter your name",
+                "required": "Name is required"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "Enter your email",
+                "required": "Email is required"
+            }
+        },
+        "changePassword": {
+            "title": "Change Password",
+            "description": "Change your password to keep your account secure.",
+            "loading": "Changing…",
+            "cancel": "Cancel",
+            "save": "Save",
+            "currentPassword": {
+                "label": "Current Password",
+                "required": "Current password is required"
+            },
+            "newPassword": {
+                "label": "New Password",
+                "required": "New password is required",
+                "minLength": "Min 8 characters"
+            },
+            "confirmPassword": {
+                "label": "Confirm Password",
+                "required": "Please confirm the new password",
+                "match": "Passwords do not match"
+            },
+            "successTitle": "Woohoo!",
+            "successMessage": "Your password has been changed successfully.",
+            "errorTitle": "Error",
+            "errorGeneric": "An error occurred while changing your password. Please try again."
+        },
+        "preferences": {
+            "title": "Preferences",
+            "description": "Manage your preferences.",
+            "loading": "Updating...",
+            "cancel": "Cancel",
+            "save": "Save",
+            "disclaimer": "These settings will affect how dates and times are displayed throughout the application. Changes are saved automatically and will persist across all your devices.",
+            "successTitle": "Woohoo!",
+            "successMessage": "Your preferences have been updated successfully.",
+            "locale": {
+                "label": "Language / Locale",
+                "required": "Language / Locale is required"
+            },
+            "timeZone": {
+                "label": "Timezone",
+                "required": "Timezone is required"
+            },
+            "showTimezoneOffset": {
+                "label": "Show Timezone Offset",
+                "required": "Show Timezone Offset is required"
+            }
+        }
+    },
+    "permissions": {
+        "title": "Permissions",
+        "description": "Verify the list of permissions available.",
+        "searchPlaceholder": "Search permissions...",
+        "perPage": "Permissions per page",
+        "showingRange": "Showing {min}-{max} of {total} permissions",
+        "pageRange": "of {max} pages",
+        "headers": {
+            "name": "Name",
+            "description": "Description",
+            "module": "Module",
+            "action": "Action"
+        },
+        "errors": {
+            "loadFailed": "Failed to load permissions"
+        },
+        "transfer": {
+            "items": "items",
+            "noItems": "No items",
+            "searchAvailable": "Search available",
+            "searchEnabled": "Search enabled",
+            "selectAll": "Select all",
+            "addSelected": "Add selected",
+            "removeSelected": "Remove selected",
+            "search": "Search",
+            "available": "Available",
+            "enabled": "Enabled"
+        }
+    },
+    "roles": {
+        "titles": {
+            "create": "Create Role",
+            "createDescription": "Create a new role with the appropriate permissions.",
+            "update": "Update Role",
+            "updateDescription": "Update the role to manage user access and permissions."
+        },
+        "view": {
+            "title": "Roles",
+            "description": "Manage user roles and their permissions.",
+            "searchPlaceholder": "Search roles...",
+            "headers": {
+                "name": "Name",
+                "description": "Description",
+                "isAdmin": "Admin",
+                "permissions": "Permissions",
+                "users": "Users",
+                "actions": "Actions"
+            }
+        },
+        "actions": {
+            "actions": "Actions",
+            "create": "Create",
+            "edit": "Edit",
+            "delete": "Disable",
+            "view": "View"
+        },
+        "pagination": {
+            "perPage": "Roles per page",
+            "showingRange": "Showing {min}-{max} of {total} roles",
+            "pageRange": "of {max} pages"
+        },
+        "form": {
+            "name": "Name",
+            "description": "Description",
+            "parentId": "Parent Role",
+            "isAdmin": "Admin",
+            "permissions": "Permissions",
+            "permissionDescription": "Select the permissions that this role will have.",
+            "no": "No",
+            "yes": "Yes",
+            "fullAdminAccess": "Full Admin access",
+            "status": "Status",
+            "save": "Save Role",
+            "cancel": "Cancel"
+        },
+        "status": {
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "errors": {
+            "nameRequired": "Name is required",
+            "descriptionRequired": "Description is required",
+            "permissionsRequired": "Permissions are required",
+            "loadFailed": "Failed to load roles",
+            "createFailed": "Failed to create role",
+            "updateFailed": "Failed to update role",
+            "deleteFailed": "Failed to delete role"
+        }
+    },
+    "users": {
+        "titles": {
+            "create": "Create User",
+            "createDescription": "Create a new user account with appropriate roles and permissions.",
+            "update": "Update User",
+            "updateDescription": "Update user information and permissions."
+        },
+        "view": {
+            "title": "Users",
+            "description": "Manage system users and their access permissions.",
+            "searchPlaceholder": "Search users...",
+            "headers": {
+                "name": "Name",
+                "email": "Email",
+                "role": "Role",
+                "status": "Status",
+                "lastLogin": "Last Login",
+                "actions": "Actions",
+                "createdAt": "Created"
+            }
+        },
+        "actions": {
+            "actions": "Actions",
+            "create": "Create",
+            "edit": "Edit",
+            "deactivate": "Disable",
+            "view": "View"
+        },
+        "pagination": {
+            "perPage": "Users per page",
+            "showingRange": "Showing {min}-{max} of {total} users",
+            "pageRange": "of {max} pages"
+        },
+        "form": {
+            "name": "Full Name",
+            "email": "Email",
+            "password": "Password",
+            "confirmPassword": "Confirm Password",
+            "role": "Role",
+            "status": "Status",
+            "save": "Create User",
+            "cancel": "Cancel"
+        },
+        "status": {
+            "title": "User Status",
+            "placeholder": "Select a user status",
+            "active": "Active",
+            "inactive": "Inactive",
+            "provisioned": "Provisioned"
+        },
+        "filters": {
+            "filter": "Filter",
+            "open": "Open",
+            "title": "Filter Users",
+            "accessControl": "Access Control",
+            "userStatus": "User Status",
+            "userRole": "User Role",
+            "statusAll": "All",
+            "statusActive": "Active",
+            "statusInactive": "Inactive",
+            "roleAll": "All",
+            "apply": "Apply",
+            "cancel": "Cancel",
+            "reset": "Reset"
+        },
+        "errors": {
+            "loadFailed": "Failed to load users",
+            "createFailed": "Failed to create user",
+            "updateFailed": "Failed to update user",
+            "deleteFailed": "Failed to delete user",
+            "nameRequired": "Name is required",
+            "emailRequired": "Email is required",
+            "roleRequired": "Role is required",
+            "statusRequired": "Status is required",
+            "passwordRequired": "Password is required",
+            "confirmPasswordRequired": "Confirm password is required",
+            "passwordMinLength": "Password must be at least 8 characters long"
+        }
+    },
+    "login": {
+        "title": "Login",
+        "subtitle": "Welcome back",
+        "description": "Enter your credentials to continue",
+        "form": {
+            "email": "Email",
+            "password": "Password   ",
+            "rememberMe": "Remember me",
+            "forgotPassword": "Forgot password?",
+            "signIn": "Sign in"
+        },
+        "errors": {
+            "email": "Email is required",
+            "password": "Password is required",
+            "invalidEmail": "Invalid email",
+            "minLength": "Minimum 6 characters"
+        },
+        "loading": "Loading...",
+        "authenticated": "Redirecting..."
+    }
+}

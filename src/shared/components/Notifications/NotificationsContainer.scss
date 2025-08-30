@@ -1,0 +1,70 @@
+.notifications-container {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+    margin-bottom: 1rem;
+  }
+
+  &--top-left {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  &--top-right {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  &--bottom-left {
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  &--bottom-right {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+// Ensure notifications appear above other content
+.notifications-container .cds--toast-notification,
+.notifications-container .cds--inline-notification {
+  position: relative;
+  z-index: 10000;
+}
+
+// Animation for notifications appearing/disappearing
+.notifications-container > * {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// For left-positioned notifications
+.notifications-container--top-left > *,
+.notifications-container--bottom-left > * {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,68 @@
+@mixin actions-col($pad-inline: var(--cds-spacing-02, 0.25rem)) {
+  align-items: end;
+
+  width: 1%;
+  max-width: 1%;
+  white-space: nowrap;
+  padding-left: $pad-inline;
+  padding-right: $pad-inline;
+
+  .cds--btn,
+  .cds--overflow-menu {
+    margin: 0;
+  }
+
+  .cds--btn + .cds--btn,
+  .cds--btn + .cds--overflow-menu,
+  .cds--overflow-menu + .cds--btn,
+  .cds--overflow-menu + .cds--overflow-menu {
+    margin-left: var(--cds-spacing-02, 0.25rem);
+  }
+
+  .cds--btn--icon-only {
+    padding-inline: var(--cds-spacing-02, 0.25rem);
+  }
+}
+
+.actions-col {
+  @include actions-col();
+}
+
+.no-clear {
+  .cds--search-input {
+    padding-right: 0;
+  }
+}
+
+.cds--data-table {
+  th.table-actions-col,
+  td.table-actions-col {
+    @include actions-col();
+  }
+}
+
+@media (max-width: 672px) {
+  .cds--data-table {
+    th.table-actions-col,
+    td.table-actions-col {
+      @include actions-col(var(--cds-spacing-01, 0.125rem));
+    }
+  }
+  .no-wrap-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+  }
+}
+
+/* No-wrap utility for the target column */
+.cds--data-table th.no-wrap,
+.cds--data-table td.no-wrap {
+  white-space: nowrap;
+}
+
+// Fake Action Button (for skeleton menu)
+.fake-action-button {
+  height: 3rem;
+}

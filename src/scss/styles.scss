@@ -1,0 +1,201 @@
+/* =========================
+   Platform App Styles
+   ========================= */
+
+/* Brand (Primary) */
+$platform-primary:        #F7D04B;
+$platform-primary-hover:  #F5C626; // darker golden
+$platform-primary-active: #F0BC0B; // deepest golden
+
+$platform-secondary:        #E0E0E0;
+$platform-secondary-hover:  #D5D5D5;
+$platform-secondary-active: #C6C6C6;
+
+/* Brand (Tertiary) */
+$platform-tertiary:        #2F3E55;
+$platform-tertiary-hover:  #263346;
+$platform-tertiary-active: #1D2837;
+
+/* Links & Focus */
+$platform-link:         #6532E1;
+$platform-link-hover:   #531FD3;
+$platform-link-active:  #3E14A6;
+$platform-focus:        transparent;
+
+/* On-color tokens */
+$platform-text-on-color: #161616; // dark text on yellow for accessibility
+$platform-icon-on-color: #161616;
+
+/* Support / Info */
+$platform-support-info-inverse: #926EEA; // lighter violet for dark bg
+$platform-background-inverse:   #161616;
+
+
+/* =========================
+   Configure Carbon Theme
+   ========================= */
+@use '@carbon/styles/scss/themes' as *;
+@use 'sass:map';
+@use '@carbon/styles/scss/theme' as theme with (
+  $theme: map.merge(
+      $white,
+      (
+        /* Primary/interactive (core) */
+        interactive: $platform-primary,
+        interactive-primary: $platform-primary,
+        interactive-secondary: $platform-secondary,
+        interactive-tertiary: $platform-tertiary,
+        border-interactive: $platform-primary,
+
+        /* Layers */
+        layer-01: #ffffff,
+        layer-02: #f4f4f4,
+        layer-03: #e0e0e0,
+        layer-04: #c6c6c6,
+        layer-05: #a8a8a8,
+        layer-06: #8d8d8d,
+        layer-07: #707070,
+
+        /* Text Fields */
+        fields-01: #ffffff,
+        fields-02: #f4f4f4,
+        fields-03: #e0e0e0,
+        fields-04: #c6c6c6,
+        fields-05: #a8a8a8,
+        fields-06: #8d8d8d,
+        fields-07: #707070,
+
+        /* Links & focus */
+        link-primary: $platform-link,
+        link-primary-hover: $platform-link-hover,
+        link-secondary: $platform-link,
+        link-inverse: $platform-text-on-color,
+        focus: $platform-focus,
+
+        /* Hover/active tuning */
+        hover-primary: $platform-primary-hover,
+        active-primary: $platform-primary-active,
+
+        /* Secondary states */
+        hover-secondary: $platform-secondary-hover,
+        active-secondary: $platform-secondary-active,
+
+        /* Brand tokens */
+        background-brand: $platform-primary,
+        text-on-color: $platform-text-on-color,
+        icon-on-color: $platform-icon-on-color,
+
+        /* Icon tokens */
+        icon-interactive: $platform-primary,
+        support-info-inverse: $platform-support-info-inverse,
+
+        /* Support tokens */
+        support-info: $platform-primary,
+
+        /* Background tokens */
+        background-primary: $platform-primary,
+        background-inverse: $platform-background-inverse,
+
+        /* Grid tokens */
+        grid-gutter: 0,
+        grid-margin: 0,
+
+        /* Modal tokens */
+        modal-container-width: 400px,
+        modal-container-height: 100%,
+        modal-container-border-radius: 0
+      )
+    )
+);
+
+
+/* =========================
+   Button tokens
+   ========================= */
+@use '@carbon/react/scss/components/button/tokens' as button-tokens with (
+  $button-primary: $platform-primary,
+  $button-primary-hover: $platform-primary-hover,
+  $button-primary-active: $platform-primary-active,
+
+  $button-secondary: $platform-secondary,
+  $button-secondary-hover: $platform-secondary-hover,
+  $button-secondary-active: $platform-secondary-active,
+
+  $button-tertiary: $platform-tertiary,
+  $button-tertiary-hover: $platform-tertiary-hover,
+  $button-tertiary-active: $platform-tertiary-active
+);
+
+
+/* =========================
+   Base imports
+   ========================= */
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/grid';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/layer';
+@use '@carbon/react/scss/components';
+
+/* Custom partials (must NOT re-configure theme anywhere) */
+@use './nav-bar.custom.scss';
+@use './data-tables.custom.scss';
+@use './permission-transfer.scss';
+@use './date-picker.custom.scss';
+
+
+/* =========================
+   Emit CSS custom properties
+   ========================= */
+:root {
+  @include theme.theme();
+  @include type.type-classes();
+
+  --font-sans-fallback: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+
+  .cds--btn--danger,
+  .cds--overflow-menu-options__option--danger .cds--overflow-menu-options__btn:hover {
+    color: $platform-secondary;
+  }
+  .cds--btn--danger.cds--btn--disabled.cds--btn--icon-only[disabled] {
+    color: var(--cds-text-on-color-disabled);
+  }
+}
+
+body {
+  font-family: var(--font-work-sans), var(--font-sans-fallback);
+  background: var(--cds-background);
+  color: var(--cds-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase !important;
+}
+
+.cds--breadcrumb {
+  display: flex;
+}
+
+@media (min-width: 1056px) {
+  .app-content {
+    margin-left: 16rem;
+    max-width: 1440px;
+  }
+  .cds--modal-container {
+    max-width: 1024px;
+  }
+}
+
+/* =========================
+   Carbon Modal (side panel)
+   ========================= */
+.cds--modal.cds--modal--side {
+  align-items: stretch; /* full height */
+  justify-content: flex-end; /* stick to right side */
+}

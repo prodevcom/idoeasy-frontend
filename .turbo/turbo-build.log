@@ -1,0 +1,47 @@
+
+
+> frontend@0.0.1 build
+> next build --no-lint
+
+[1G[0K [33m[1m⚠[22m[39m Linting is disabled.
+   [1m[38;2;173;127;168m▲ Next.js 15.5.0[39m[22m
+   - Environments: .env
+   - Experiments (use with caution):
+     [1m✓[22m externalDir
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully in 2.4s
+[?25l [37m[1m [22m[39m Checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Checking validity of types  [36m...[39m[2K[1G[?25h [37m[1m [22m[39m Checking validity of types     [32m[1m✓[22m[39m Checking validity of types 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/5)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/5)  [36m[=   ][39m[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (5/5)
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+
+[4mRoute (app)[24m                                 [4mSize[24m  [4mFirst Load JS[24m  [4m[24m  [4m[24m
+┌ ○ /                                      135 B         [37m[1m102 kB[22m[39m
+├ ○ /_not-found                            135 B         [37m[1m102 kB[22m[39m
+├ ƒ /[locale]                              786 B         [37m[1m185 kB[22m[39m
+├ ƒ /[locale]/dash                         253 B         [37m[1m102 kB[22m[39m
+├ ƒ /[locale]/login                        363 B         [37m[1m283 kB[22m[39m
+├ ƒ /[locale]/me                         3.16 kB         [37m[1m285 kB[22m[39m
+├ ƒ /[locale]/permissions                2.17 kB         [37m[1m284 kB[22m[39m
+├ ƒ /[locale]/roles                        294 B         [37m[1m283 kB[22m[39m
+├ ƒ /[locale]/roles/[id]                   420 B         [37m[1m283 kB[22m[39m
+├ ƒ /[locale]/roles/create                 392 B         [37m[1m283 kB[22m[39m
+├ ƒ /[locale]/users                        301 B         [37m[1m287 kB[22m[39m
+├ ƒ /[locale]/users/[id]                   423 B         [37m[1m288 kB[22m[39m
+├ ƒ /[locale]/users/create                 382 B         [37m[1m287 kB[22m[39m
+├ ƒ /api/auth/[...nextauth]                135 B         [37m[1m102 kB[22m[39m
+└ ƒ /api/backend/[...path]                 135 B         [37m[1m102 kB[22m[39m
++ First Load JS shared by all             [37m[1m102 kB[22m[39m
+  ├ chunks/18-3b75d1fa14b28185.js        45.8 kB
+  ├ chunks/87c73c54-24122e7b92478d00.js  54.2 kB
+  └ other shared chunks (total)          2.02 kB
+
+
+ƒ Middleware                             [37m[1m50.7 kB[22m[39m
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+[?25h[1G[0K⠙[1G[0K

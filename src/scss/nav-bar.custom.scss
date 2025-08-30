@@ -1,0 +1,18 @@
+@use '@carbon/react/scss/theme';
+
+.disabled-sidenav-link {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: theme.$text-secondary;
+
+  &:hover {
+    background: none;
+  }
+}
+
+.nav-bar-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: theme.$text-secondary;
+  padding: 0.5rem 1rem;
+}

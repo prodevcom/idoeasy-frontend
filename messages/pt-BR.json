@@ -1,0 +1,303 @@
+{
+    "appHeader": {
+        "userProfile": "{name}'s Profile",
+        "logout": "Logout"
+    },
+    "navigation": {
+        "dashboard": "Painel",
+        "check-in": "Check-in",
+        "create-event": "Criar Evento",
+        "my-events": "Meus Eventos",
+        "balance": "Saldo",
+        "events": "Eventos",
+        "users": "Usuários",
+        "payments": "Pagamentos",
+        "roles": "Funções",
+        "permissions": "Permissões",
+        "profile": "Perfil",
+        "admin": "Admin"
+    },
+    "breadcrumbs": {
+        "dashboard": "Painel",
+        "users": "Usuários",
+        "roles": "Funções",
+        "permissions": "Permissões",
+        "me": "Perfil",
+        "create": "Criar",
+        "edit": "Editar",
+        "view": "Visualizar"
+    },
+    "profile": {
+        "title": "Perfil",
+        "description": "Gerencie suas informações e preferências.",
+        "actions": {
+            "title": "Ações do Usuário",
+            "updateUserDetails": "Atualizar minhas info",
+            "changePassword": "Alterar Senha",
+            "updatePreferences": "Atualizar Preferências",
+            "updateAvatar": "Atualizar Avatar"
+        },
+        "auditLogs": {
+            "title": "Meus Logs de Auditoria",
+            "description": "Você pode ver as últimas 30 ações que você realizou",
+            "headers": {
+                "date": "Data",
+                "description": "Descrição"
+            }
+        },
+        "changeUserInfos": {
+            "title": "Atualizar Informações do Usuário",
+            "description": "Você está atualizando suas informações do usuário.",
+            "loading": "Atualizando...",
+            "cancel": "Cancelar",
+            "save": "Salvar",
+            "successTitle": "Woohoo!",
+            "successMessage": "Suas informações foram atualizadas com sucesso.",
+            "errorTitle": "Erro",
+            "errorGeneric": "Ocorreu um erro ao atualizar suas informações. Por favor, tente novamente.",
+            "name": {
+                "label": "Nome",
+                "placeholder": "Digite seu nome",
+                "required": "Nome é obrigatório"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "Digite seu email",
+                "required": "Email é obrigatório"
+            }
+        },
+        "changePassword": {
+            "title": "Alterar Senha",
+            "description": "Altere sua senha para manter sua conta segura.",
+            "loading": "Alterando...",
+            "cancel": "Cancelar",
+            "save": "Salvar",
+            "currentPassword": {
+                "label": "Senha Atual",
+                "required": "Senha atual é obrigatória"
+            },
+            "newPassword": {
+                "label": "Nova Senha",
+                "required": "Nova senha é obrigatória",
+                "minLength": "Mínimo de 8 caracteres"
+            },
+            "confirmPassword": {
+                "label": "Confirmar Senha",
+                "required": "Por favor, confirme a nova senha",
+                "match": "As senhas não coincidem"
+            },
+            "successTitle": "Woohoo!",
+            "successMessage": "Sua senha foi alterada com sucesso.",
+            "errorTitle": "Erro",
+            "errorGeneric": "Ocorreu um erro ao alterar sua senha. Por favor, tente novamente."
+        },
+        "preferences": {
+            "title": "Preferências",
+            "description": "Gerencie suas preferências.",
+            "loading": "Atualizando...",
+            "cancel": "Cancelar",
+            "save": "Salvar",
+            "disclaimer": "Essas configurações afetarão como datas e horários são exibidos em toda a aplicação. As alterações são salvas automaticamente e persistirão em todos os seus dispositivos.",
+            "successTitle": "Woohoo!",
+            "successMessage": "Suas preferências foram atualizadas com sucesso.",
+            "locale": {
+                "label": "Idioma / Locale",
+                "required": "Idioma / Locale é obrigatório"
+            },
+            "timeZone": {
+                "label": "Fuso Horário",
+                "required": "Fuso Horário é obrigatório"
+            },
+            "showTimezoneOffset": {
+                "label": "Mostrar Deslocamento do Fuso Horário",
+                "required": "Mostrar Deslocamento do Fuso Horário é obrigatório"
+            }
+        }
+    },
+    "permissions": {
+        "title": "Permissões",
+        "description": "Verifique a lista de permissões disponíveis.",
+        "searchPlaceholder": "Buscar permissões...",
+        "perPage": "Permissões por página",
+        "showingRange": "Mostrando {min}-{max} de {total} permissões",
+        "pageRange": "de {max} páginas",
+        "headers": {
+            "name": "Nome",
+            "description": "Descrição",
+            "module": "Módulo",
+            "action": "Ação"
+        },
+        "errors": {
+            "loadFailed": "Falha ao carregar permissões"
+        },
+        "transfer": {
+            "items": "itens",
+            "noItems": "Nenhum item",
+            "searchAvailable": "Buscar disponíveis",
+            "searchEnabled": "Buscar habilitados",
+            "selectAll": "Selecionar todos",
+            "addSelected": "Adicionar selecionados",
+            "removeSelected": "Remover selecionados",
+            "search": "Buscar",
+            "available": "Disponíveis",
+            "enabled": "Habilitados"
+        }
+    },
+    "roles": {
+        "titles": {
+            "create": "Criar Função",
+            "createDescription": "Crie uma nova função com as permissões apropriadas.",
+            "update": "Atualizar Função",
+            "updateDescription": "Atualize a função para gerenciar os acessos e permissões dos usuários."
+        },
+        "view": {
+            "title": "Funções",
+            "description": "Gerencie as funções dos usuários e suas permissões.",
+            "searchPlaceholder": "Buscar funções...",
+            "headers": {
+                "name": "Nome",
+                "description": "Descrição",
+                "isAdmin": "Admin",
+                "permissions": "Permissões",
+                "users": "Usuários",
+                "actions": "Ações"
+            }
+        },
+        "actions": {
+            "actions": "Ações",
+            "create": "Criar",
+            "edit": "Editar",
+            "delete": "Desativar",
+            "view": "Visualizar"
+        },
+        "pagination": {
+            "perPage": "Funções por página",
+            "showingRange": "Mostrando {min}-{max} de {total} funções",
+            "pageRange": "de {max} páginas"
+        },
+        "form": {
+            "name": "Nome",
+            "description": "Descrição",
+            "parentId": "Função Pai",
+            "isAdmin": "Admin",
+            "permissions": "Permissões",
+            "permissionDescription": "Selecione as permissões que esta função terá.",
+            "no": "Não",
+            "yes": "Sim",
+            "fullAdminAccess": "Acesso total de administrador",
+            "status": "Status",
+            "save": "Salvar Função",
+            "cancel": "Cancelar"
+        },
+        "status": {
+            "active": "Ativo",
+            "inactive": "Inativo"
+        },
+        "errors": {
+            "nameRequired": "Nome é obrigatório",
+            "descriptionRequired": "Descrição é obrigatória",
+            "permissionsRequired": "Permissões são obrigatórias",
+            "loadFailed": "Falha ao carregar funções",
+            "createFailed": "Falha ao criar função",
+            "updateFailed": "Falha ao atualizar função",
+            "deleteFailed": "Falha ao excluir função"
+        }
+    },
+    "users": {
+        "titles": {
+            "create": "Criar Usuário",
+            "createDescription": "Crie uma nova conta de usuário com funções e permissões apropriadas.",
+            "update": "Atualizar Usuário",
+            "updateDescription": "Atualize as informações e permissões do usuário."
+        },
+        "view": {
+            "title": "Usuários",
+            "description": "Gerencie os usuários do sistema e suas permissões de acesso.",
+            "searchPlaceholder": "Buscar usuários...",
+            "headers": {
+                "name": "Nome",
+                "email": "Email",
+                "role": "Função",
+                "status": "Status",
+                "lastLogin": "Último Login",
+                "actions": "Ações",
+                "createdAt": "Criado"
+            }
+        },
+        "actions": {
+            "actions": "Ações",
+            "create": "Criar",
+            "edit": "Editar",
+            "deactivate": "Desativar",
+            "view": "Visualizar"
+        },
+        "pagination": {
+            "perPage": "Usuários por página",
+            "showingRange": "Mostrando {min}-{max} de {total} usuários",
+            "pageRange": "de {max} páginas"
+        },
+        "form": {
+            "name": "Nome Completo",
+            "email": "Email",
+            "password": "Senha",
+            "confirmPassword": "Confirmar Senha",
+            "role": "Função",
+            "status": "Status",
+            "save": "Criar Usuário",
+            "cancel": "Cancelar"
+        },
+        "status": {
+            "title": "Status do Usuário",
+            "placeholder": "Selecione o status do usuário",
+            "active": "Ativo",
+            "inactive": "Inativo",
+            "provisioned": "Provisionado"
+        },
+        "filters": {
+            "filter": "Filtro",
+            "open": "Abrir",
+            "title": "Filtros de Usuários",
+            "accessControl": "Controle de Acesso",
+            "userStatus": "Status do Usuário",
+            "userRole": "Função do Usuário",
+            "statusAll": "Todos",
+            "roleAll": "Todos",
+            "apply": "Aplicar Filtros",
+            "cancel": "Cancelar",
+            "reset": "Limpar Filtros"
+        },
+        "errors": {
+            "loadFailed": "Falha ao carregar usuários",
+            "createFailed": "Falha ao criar usuário",
+            "updateFailed": "Falha ao atualizar usuário",
+            "deleteFailed": "Falha ao excluir usuário",
+            "nameRequired": "Nome é obrigatório",
+            "emailRequired": "Email é obrigatório",
+            "roleRequired": "Função é obrigatória",
+            "statusRequired": "Status é obrigatório",
+            "passwordRequired": "Senha é obrigatória",
+            "confirmPasswordRequired": "Confirmar senha é obrigatória",
+            "passwordMinLength": "Senha deve ter no mínimo 8 caracteres"
+        }
+    },
+    "login": {
+        "title": "Login",
+        "subtitle": "Bem-vindo de volta",
+        "description": "Faça login para continuar",
+        "form": {
+            "email": "Email",
+            "password": "Senha",
+            "rememberMe": "Lembrar-me",
+            "forgotPassword": "Esqueceu a senha?",
+            "signIn": "Entrar"
+        },
+        "errors": {
+            "email": "Email é obrigatório",
+            "password": "Senha é obrigatória",
+            "invalidEmail": "Email inválido",
+            "minLength": "Mínimo de 6 caracteres"
+        },
+        "loading": "Carregando...",
+        "redirecting": "Redirecionando..."
+    }
+}
