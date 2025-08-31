@@ -1,21 +1,14 @@
 version: 1
-
 frontend:
   phases:
     preBuild:
       commands:
         - mkdir -p ~/.ssh
-        # Ensure the secret was injected
-        - if [ -z "${SSH_PRIVATE_KEY}" ]; then echo "ERROR: SSH_PRIVATE_KEY is empty (Amplify secrets not injected)"; exit 1; fi
-        # Validate it's base64 of an OpenSSH key
-        - echo "$SSH_PRIVATE_KEY" | base64 -d | head -n 1 | grep -q "BEGIN OPENSSH" || { echo "ERROR: SSH_PRIVATE_KEY is not valid base64 of an OpenSSH key"; exit 1; }
-        # Write key file
         - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_ed25519
         - chmod 600 ~/.ssh/id_ed25519
         - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
         - eval "$(ssh-agent -s)"
         - ssh-add ~/.ssh/id_ed25519
-        # GitHub prints a message and exits non-zero; ignore it
         - ssh -T git@github.com || true
         - npm ci
     build:
