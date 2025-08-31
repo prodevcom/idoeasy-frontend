@@ -81,9 +81,9 @@ export default function HomePage({ user, options }: HomePageProps) {
         </Stack>
       </div>
       <div>
-        <p>BACKEND_URL: {options?.backendUrl}</p>
-        <p>NEXTAUTH_TRUST_HOST: {options?.nextauthTrustHost}</p>
-        <p>NEXTAUTH_BASE_PATH: {options?.nextauthBasePath}</p>
+        <p>NEXT_PUBLIC_BACKEND_URL: {options?.backendUrl}</p>
+        <p>NEXT_PUBLIC_NEXTAUTH_TRUST_HOST: {options?.nextauthTrustHost}</p>
+        <p>NEXT_PUBLIC_NEXTAUTH_BASE_PATH: {options?.nextauthBasePath}</p>
         <p>NODE_ENV: {options?.nodeEnv}</p>
       </div>
     </div>

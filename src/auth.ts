@@ -41,7 +41,7 @@ const performRefreshTokenIfNeeded = async (token: JWT) => {
   if (!shouldRefresh) return token;
 
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/refresh`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/refresh`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ refreshToken: token.refreshToken }),
@@ -121,12 +121,15 @@ export const authConfig = {
         const password = credentials?.password as string;
         if (!email || !password) return null;
 
-        const res = await fetch(`${process.env.BACKEND_URL}/api${ENDPOINTS.AUTH.LOGIN}`, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api${ENDPOINTS.AUTH.LOGIN}`,
+          {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+            cache: 'no-store',
+          },
+        );
         if (!res.ok) return null;
 
         const response = (await res.json()) as ApiSuccess<Authentication>;
@@ -145,10 +148,10 @@ export const authConfig = {
   pages: { signIn: '/login' },
 
   // Fix for UntrustedHost error in production
-  trustHost: process.env.NEXTAUTH_TRUST_HOST === 'true',
+  trustHost: process.env.NEXT_PUBLIC_NEXTAUTH_TRUST_HOST === 'true',
 
   // Fix for localhost redirects in production
-  basePath: process.env.NEXTAUTH_BASE_PATH || '/api/auth',
+  basePath: process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH || '/api/auth',
 
   // Optimize session handling to reduce unnecessary calls
   session: {
@@ -164,6 +167,9 @@ export const authConfig = {
 
   // Enable debug only in development
   debug: process.env.NODE_ENV === 'development',
+
+  // Secret key for NextAuth
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
 
   // Add events for better control
   events: {

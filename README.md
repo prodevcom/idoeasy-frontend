@@ -5,12 +5,12 @@
 This project requires the following environment variables to be configured:
 
 ### NextAuth Configuration
-- `NEXTAUTH_SECRET` - Secret key for NextAuth.js (required)
-- `NEXTAUTH_TRUST_HOST` - **What it does**: Tells NextAuth to trust the current host URL. **Why needed**: In production (AWS Amplify), NextAuth blocks requests from "untrusted" hosts to prevent CSRF attacks. Setting this to `true` allows the app to work in production. **Default**: `false` (safer for development)
-- `NEXTAUTH_BASE_PATH` - **What it does**: Sets the base path for NextAuth API routes. **Why needed**: Prevents NextAuth from redirecting to localhost in production. **Default**: `/api/auth`
+- `NEXT_PUBLIC_NEXTAUTH_SECRET` - Secret key for NextAuth.js (required)
+- `NEXT_PUBLIC_NEXTAUTH_TRUST_HOST` - **What it does**: Tells NextAuth to trust the current host URL. **Why needed**: In production (AWS Amplify), NextAuth blocks requests from "untrusted" hosts to prevent CSRF attacks. Setting this to `true` allows the app to work in production. **Default**: `false` (safer for development)
+- `NEXT_PUBLIC_NEXTAUTH_BASE_PATH` - **What it does**: Sets the base path for NextAuth API routes. **Why needed**: Prevents NextAuth from redirecting to localhost in production. **Default**: `/api/auth`
 
 ### Backend API Configuration
-- `BACKEND_URL` - URL of your backend API (required)
+- `NEXT_PUBLIC_BACKEND_URL` - URL of your backend API (required)
 
 ### Development Configuration
 - `NODE_ENV` - Environment mode: `development`, `production`, `test` (default: `development`)
@@ -26,8 +26,8 @@ This project requires the following environment variables to be configured:
 
 3. For production (AWS Amplify), set:
    ```bash
-   NEXTAUTH_TRUST_HOST=true
-   NEXTAUTH_BASE_PATH=/api/auth
+   NEXT_PUBLIC_NEXTAUTH_TRUST_HOST=true
+   NEXT_PUBLIC_NEXTAUTH_BASE_PATH=/api/auth
    ```
 
 ## Development
