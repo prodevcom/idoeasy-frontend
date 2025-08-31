@@ -231,7 +231,7 @@ export const authConfig = {
             },
           },
           callbackUrl: {
-            name: 'next-auth.callback-url',
+            name: '__Secure-authjs.callback-url',
             options: {
               httpOnly: false,
               sameSite: 'lax',
