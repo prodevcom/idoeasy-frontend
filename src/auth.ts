@@ -147,6 +147,9 @@ export const authConfig = {
   // Fix for UntrustedHost error in production
   trustHost: process.env.NEXTAUTH_TRUST_HOST === 'true',
 
+  // Fix for localhost redirects in production
+  basePath: process.env.NEXTAUTH_BASE_PATH || '/api/auth',
+
   // Optimize session handling to reduce unnecessary calls
   session: {
     strategy: 'jwt',
