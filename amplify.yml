@@ -1,0 +1,29 @@
+version: 1
+env:
+  variables:
+    NODE_ENV: production
+    BACKEND_URL: https://api.idoeasy.net
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - mkdir -p ~/.ssh
+        # SSH_PRIVATE_KEY is base64 in your secret → decode to file
+        - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_ed25519
+        - chmod 600 ~/.ssh/id_ed25519
+        - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        - eval "$(ssh-agent -s)"
+        - ssh-add ~/.ssh/id_ed25519
+        - ssh -T git@github.com || true
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
