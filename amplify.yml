@@ -12,9 +12,8 @@ frontend:
         - "export SSH_PRIVATE_KEY=$(node -e 'const s=JSON.parse(process.argv[1]||\"{}\");process.stdout.write(s.SSH_PRIVATE_KEY||\"\");' \"$SECRET_JSON\")"
         - "test -n \"$SSH_PRIVATE_KEY\" || { echo 'ERROR: SSH_PRIVATE_KEY missing in secret JSON'; exit 1; }"
         - "mkdir -p ~/.ssh"
-        # Se o valor está em BASE64 no secret:
+        # O valor está em BASE64 no secret, então decode:
         - "echo \"$SSH_PRIVATE_KEY\" | base64 -d > ~/.ssh/id_ed25519"
-        # (Se estiver em plaintext com BEGIN/END e quebras reais, troque a linha acima por: printf \"%s\" \"$SSH_PRIVATE_KEY\" > ~/.ssh/id_ed25519)
         - "chmod 600 ~/.ssh/id_ed25519"
         - "ssh-keyscan -H github.com >> ~/.ssh/known_hosts"
         - "eval \"$(ssh-agent -s)\""
