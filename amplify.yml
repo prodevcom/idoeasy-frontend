@@ -1,9 +1,4 @@
 version: 1
-env:
-  variables:
-    NODE_ENV: production
-    BACKEND_URL: https://api.idoeasy.net
-
 frontend:
   phases:
     preBuild:
