@@ -84,16 +84,27 @@ function buildUpstreamHeaders(req: NextRequest, accessToken: string): Headers {
  */
 async function forwardToUpstream(req: NextRequest, path: string[]) {
   // 1) Authenticate via next-auth
+  console.log('🔍 [Backend Proxy] Authenticating request to:', path.join('/'));
+  console.log('🔍 [Backend Proxy] Request URL:', req.url);
+  console.log('🔍 [Backend Proxy] Request headers:', Object.fromEntries(req.headers.entries()));
+
   const jwt = await getToken({ req, secret: NEXTAUTH_SECRET });
+  console.log('🔍 [Backend Proxy] JWT token:', jwt ? 'Present' : 'Missing');
+  console.log('🔍 [Backend Proxy] JWT accessToken:', jwt?.accessToken ? 'Present' : 'Missing');
+
   const accessToken = jwt?.accessToken as string | undefined;
 
   if (!accessToken) {
+    console.error('❌ [Backend Proxy] No access token found');
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   // 2) Build upstream target
   const url = buildUpstreamUrl(req, ['api', ...path]);
   const headers = buildUpstreamHeaders(req, accessToken);
+
+  console.log('🔍 [Backend Proxy] Forwarding to:', url);
+  console.log('🔍 [Backend Proxy] Forwarding headers:', Object.fromEntries(headers.entries()));
 
   // 3) Extract request body only when allowed (avoids needless buffering)
   const includeBody = methodAllowsBody(req.method);

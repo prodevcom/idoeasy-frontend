@@ -160,7 +160,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          ...(process.env.NODE_ENV === 'production' ? { domain: '.idoeasy.net' } : {}),
+          domain: '.amplifyapp.com', // Test with Amplify domain
         },
       },
       callbackUrl: {
@@ -170,7 +170,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          ...(process.env.NODE_ENV === 'production' ? { domain: '.idoeasy.net' } : {}),
+          domain: '.amplifyapp.com', // Test with Amplify domain
         },
       },
       csrfToken: {
@@ -180,7 +180,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          ...(process.env.NODE_ENV === 'production' ? { domain: '.idoeasy.net' } : {}),
+          domain: '.amplifyapp.com', // Test with Amplify domain
         },
       },
     },
