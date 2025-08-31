@@ -146,43 +146,6 @@ export const authConfig = {
 
   // Simplified configuration for production
   trustHost: true, // Always trust host in production
-  secret: process.env.NEXTAUTH_SECRET,
-
-  // Fix for session persistence in production
-  ...(process.env.NODE_ENV === 'production' && {
-    cookies: {
-      sessionToken: {
-        name: '__Secure-next-auth.session-token',
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          secure: true,
-          domain: '.amplifyapp.com',
-        },
-      },
-      callbackUrl: {
-        name: 'next-auth.callback-url',
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          secure: true,
-          domain: '.amplifyapp.com',
-        },
-      },
-      csrfToken: {
-        name: 'next-auth.csrf-token',
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          secure: true,
-          domain: '.amplifyapp.com',
-        },
-      },
-    },
-  }),
 
   // Optimize session handling to reduce unnecessary calls
   session: {

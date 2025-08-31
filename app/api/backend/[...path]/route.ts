@@ -8,7 +8,6 @@ import { getToken } from 'next-auth/jwt';
  * Example: https://api.example.com/api/v1
  */
 const BACKEND_URL = process.env.BACKEND_URL!;
-const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET!;
 
 /** Allowed HTTP methods for this proxy endpoint. */
 const ALLOWED = new Set<Uppercase<string>>([
@@ -83,18 +82,7 @@ function buildUpstreamHeaders(req: NextRequest, accessToken: string): Headers {
  * to the client.
  */
 async function forwardToUpstream(req: NextRequest, path: string[]) {
-  // 1) Authenticate via next-auth
-  console.log('🔍 [Backend Proxy] Authenticating request to:', path.join('/'));
-  console.log('🔍 [Backend Proxy] Request URL:', req.url);
-  console.log('🔍 [Backend Proxy] Request headers:', Object.fromEntries(req.headers.entries()));
-
-  console.log('🔍 [Backend Proxy] NEXTAUTH_SECRET present:', !!NEXTAUTH_SECRET);
-  console.log('🔍 [Backend Proxy] NEXTAUTH_SECRET length:', NEXTAUTH_SECRET?.length || 0);
-
-  const jwt = await getToken({ req, secret: NEXTAUTH_SECRET });
-  console.log('🔍 [Backend Proxy] JWT token:', jwt ? 'Present' : 'Missing');
-  console.log('🔍 [Backend Proxy] JWT accessToken:', jwt?.accessToken ? 'Present' : 'Missing');
-
+  const jwt = await getToken({ req });
   const accessToken = jwt?.accessToken as string | undefined;
 
   if (!accessToken) {
@@ -105,9 +93,6 @@ async function forwardToUpstream(req: NextRequest, path: string[]) {
   // 2) Build upstream target
   const url = buildUpstreamUrl(req, ['api', ...path]);
   const headers = buildUpstreamHeaders(req, accessToken);
-
-  console.log('🔍 [Backend Proxy] Forwarding to:', url);
-  console.log('🔍 [Backend Proxy] Forwarding headers:', Object.fromEntries(headers.entries()));
 
   // 3) Extract request body only when allowed (avoids needless buffering)
   const includeBody = methodAllowsBody(req.method);
