@@ -8,9 +8,15 @@ import type { AuthUser } from '@entech/contracts';
 
 type HomePageProps = {
   user?: AuthUser;
+  options?: {
+    backendUrl?: string;
+    nextauthTrustHost?: string;
+    nextauthBasePath?: string;
+    nodeEnv?: string;
+  };
 };
 
-export default function HomePage({ user }: HomePageProps) {
+export default function HomePage({ user, options }: HomePageProps) {
   const router = useRouter();
 
   const handleDashboardClick = () => {
@@ -73,6 +79,12 @@ export default function HomePage({ user }: HomePageProps) {
             </p>
           </div>
         </Stack>
+      </div>
+      <div>
+        <p>BACKEND_URL: {options?.backendUrl}</p>
+        <p>NEXTAUTH_TRUST_HOST: {options?.nextauthTrustHost}</p>
+        <p>NEXTAUTH_BASE_PATH: {options?.nextauthBasePath}</p>
+        <p>NODE_ENV: {options?.nodeEnv}</p>
       </div>
     </div>
   );
