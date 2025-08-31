@@ -1,0 +1,34 @@
+version: 1
+env:
+  variables:
+    NODE_ENV: production
+    BACKEND_URL: https://api.idoeasy.net
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - set -euo pipefail
+        - mkdir -p ~/.ssh
+        # Sanity checks
+        - '[ -n "${SSH_PRIVATE_KEY:-}" ] || (echo "ERROR: SSH_PRIVATE_KEY is empty (Amplify secrets not injected)"; exit 1)'
+        - echo "$SSH_PRIVATE_KEY" | base64 -d | head -n 1 | grep -q "BEGIN OPENSSH" || (echo "ERROR: SSH_PRIVATE_KEY is not valid base64 of an OpenSSH key"; exit 1)
+        # Write key
+        - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_ed25519
+        - chmod 600 ~/.ssh/id_ed25519
+        - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        - eval "$(ssh-agent -s)"
+        - ssh-add ~/.ssh/id_ed25519
+        # Test auth (GitHub prints a message and exits non-zero; ignore)
+        - ssh -T git@github.com || true
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
