@@ -213,6 +213,41 @@ export const authConfig = {
       return session;
     },
   },
+  // Fix for session persistence in production
+  ...(process.env.NODE_ENV === 'production' && {
+    cookies: {
+      sessionToken: {
+        name: '__Secure-authjs.session-token', // NextAuth v5 naming
+        options: {
+          httpOnly: true,
+          sameSite: 'lax',
+          path: '/',
+          secure: true,
+          domain: '.amplifyapp.com',
+        },
+      },
+      callbackUrl: {
+        name: '__Secure-authjs.callback-url', // NextAuth v5 naming
+        options: {
+          httpOnly: true,
+          sameSite: 'lax',
+          path: '/',
+          secure: true,
+          domain: '.amplifyapp.com',
+        },
+      },
+      csrfToken: {
+        name: '__Host-authjs.csrf-token', // NextAuth v5 naming
+        options: {
+          httpOnly: true,
+          sameSite: 'lax',
+          path: '/',
+          secure: true,
+          domain: '.amplifyapp.com',
+        },
+      },
+    },
+  }),
 } satisfies NextAuthConfig;
 
 export const { auth, handlers, signIn, signOut } = NextAuth(authConfig);
