@@ -17,7 +17,7 @@
     "@carbon/react": "^1.89.0",
     "@carbon/styles": "^1.88.0",
     "@carbon/themes": "^11.58.0",
-    "@entech/contracts": "git+ssh://git@github.com/prodevcom/idoeasy-contracts.git",
+    "@entech/contracts": "https://github.com/prodevcom/idoeasy-contracts.git",
     "@hookform/resolvers": "^5.2.1",
     "@tanstack/react-query": "^5.85.0",
     "axios": "^1.11.0",
