@@ -144,6 +144,9 @@ export const authConfig = {
   ],
   pages: { signIn: '/login' },
 
+  // Fix for UntrustedHost error in production
+  trustHost: process.env.NEXTAUTH_TRUST_HOST === 'true',
+
   // Optimize session handling to reduce unnecessary calls
   session: {
     strategy: 'jwt',
