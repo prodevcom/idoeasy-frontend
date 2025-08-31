@@ -5,6 +5,9 @@ frontend:
     preBuild:
       commands:
         - "set -e"
+        - "echo '=== CONFIGURANDO NODE.JS 22 ==='"
+        - "nvm install 22.16.0"
+        - "nvm use 22.16.0"
         - "echo '=== DEBUG: VERSÕES ==='"
         - "node --version"
         - "npm --version"
