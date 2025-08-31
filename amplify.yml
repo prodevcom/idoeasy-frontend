@@ -3,9 +3,11 @@ frontend:
   phases:
     preBuild:
       commands:
+        - SECRET_JSON=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-east-1:XXXXXXXXXXXX:secret:idoeasy-prod-env-XXXX --query SecretString --output text)
+        - export SSH_PRIVATE_KEY_B64=$(node -e "console.log(JSON.parse(process.argv[1]).SSH_PRIVATE_KEY_B64)" "$SECRET_JSON")
+        - export NEXTAUTH_SECRET=$(node -e "console.log(JSON.parse(process.argv[1]).NEXTAUTH_SECRET)" "$SECRET_JSON")
         - mkdir -p ~/.ssh
-        # SSH_PRIVATE_KEY is base64 in your secret → decode to file
-        - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_ed25519
+        - echo "$SSH_PRIVATE_KEY_B64" | base64 -d > ~/.ssh/id_ed25519
         - chmod 600 ~/.ssh/id_ed25519
         - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
         - eval "$(ssh-agent -s)"
