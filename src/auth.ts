@@ -153,6 +153,41 @@ export const authConfig = {
   // Fix for localhost redirects in production
   basePath: process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH || '/api/auth',
 
+  // Fix for session persistence in production
+  ...(process.env.NODE_ENV === 'production' && {
+    cookies: {
+      sessionToken: {
+        name: '__Secure-next-auth.session-token',
+        options: {
+          httpOnly: true,
+          sameSite: 'lax',
+          path: '/',
+          secure: true,
+          domain: '.idoeasy.net',
+        },
+      },
+      callbackUrl: {
+        name: '__Secure-next-auth.callback-url',
+        options: {
+          sameSite: 'lax',
+          path: '/',
+          secure: true,
+          domain: '.idoeasy.net',
+        },
+      },
+      csrfToken: {
+        name: '__Host-next-auth.csrf-token',
+        options: {
+          httpOnly: true,
+          sameSite: 'lax',
+          path: '/',
+          secure: true,
+          domain: '.idoeasy.net',
+        },
+      },
+    },
+  }),
+
   // Optimize session handling to reduce unnecessary calls
   session: {
     strategy: 'jwt',

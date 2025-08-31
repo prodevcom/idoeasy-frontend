@@ -51,12 +51,26 @@ export const PreferencesProvider = memo(function PreferencesProvider({
       const status = (error as { response?: { status?: number } })?.response?.status;
 
       if (status === 401 || status === 403) {
-        setHasError(true);
-        setIsLoggingOut(true);
-        executeLogout(pathname);
+        // Não executa logout se ainda está carregando inicialmente
+        if (isLoading) {
+          return;
+        }
+
+        // Adiciona delay para evitar logout prematuro durante login inicial
+        const timeoutId = setTimeout(() => {
+          // Verifica se ainda está com erro após o delay e não está carregando
+          if (isError && !isSuccess && !isLoading) {
+            setHasError(true);
+            setIsLoggingOut(true);
+            executeLogout(pathname);
+          }
+        }, 2000); // 2 segundos de delay
+
+        // Cleanup do timeout se o componente for desmontado
+        return () => clearTimeout(timeoutId);
       }
     }
-  }, [isError, error, hasError, isLoggingOut, pathname]);
+  }, [isError, error, hasError, isLoggingOut, pathname, isSuccess, isLoading]);
 
   // Memoize preferences to prevent unnecessary recalculations
   const preferences = useMemo(() => {

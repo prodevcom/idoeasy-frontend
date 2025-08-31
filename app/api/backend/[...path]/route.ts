@@ -64,6 +64,10 @@ function buildUpstreamHeaders(req: NextRequest, accessToken: string): Headers {
   const tz = req.headers.get('x-timezone');
   if (tz) headers.set('x-timezone', tz);
 
+  // Forward User-Agent for backend tracking
+  const userAgent = req.headers.get('user-agent');
+  if (userAgent) headers.set('user-agent', userAgent);
+
   headers.set('authorization', `Bearer ${accessToken}`);
 
   return headers;
