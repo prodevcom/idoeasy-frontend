@@ -146,7 +146,8 @@ export const authConfig = {
 
   // Simplified configuration for production
   trustHost: true, // Always trust host in production
-  
+  secret: process.env.NEXTAUTH_SECRET,
+
   // Fix for session persistence in production
   ...(process.env.NODE_ENV === 'production' && {
     cookies: {

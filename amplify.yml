@@ -14,14 +14,10 @@ frontend:
         - "npm --version"
         - "echo '=== DEBUG: SSH ==='"
         - "export AWS_DEFAULT_REGION=us-east-1"
-        # Injecting environment variables from Secrets Manager (SSH)
+        # Injecting environment variables from Secrets Manager
         - "echo '=== INJECTING ENVIRONMENT VARIABLES FROM SECRETS MANAGER (SSH) ==='"
         - "SECRET_JSON=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-east-1:800572458310:secret:idoeasy-prod-env-UPzspI --query SecretString --output text)"
         - "export SSH_PRIVATE_KEY=$(node -e 'const s=JSON.parse(process.argv[1]||\"{}\");process.stdout.write(s.SSH_PRIVATE_KEY||\"\");' \"$SECRET_JSON\")"
-        - "export BACKEND_URL=$(node -e 'const s=JSON.parse(process.argv[1]||\"{}\");process.stdout.write(s.BACKEND_URL||\"\");' \"$SECRET_JSON\")"
-        - "export NEXTAUTH_SECRET=$(node -e 'const s=JSON.parse(process.argv[1]||\"{}\");process.stdout.write(s.NEXTAUTH_SECRET||\"\");' \"$SECRET_JSON\")"
-        - "export NEXTAUTH_URL=https://www.idoeasy.net"
-        - "export NODE_ENV=production"
         - "test -n \"$SSH_PRIVATE_KEY\" || { echo 'ERROR: SSH_PRIVATE_KEY missing in secret JSON'; exit 1; }"
         - "mkdir -p ~/.ssh"
         - "echo \"$SSH_PRIVATE_KEY\" > ~/.ssh/id_ed25519"
