@@ -6,7 +6,7 @@ frontend:
       commands:
         - mkdir -p ~/.ssh
         # Ensure the secret was injected
-        - test -n "${SSH_PRIVATE_KEY:-}" || { echo "ERROR: SSH_PRIVATE_KEY is empty (Amplify secrets not injected)"; exit 1; }
+        - if [ -z "${SSH_PRIVATE_KEY}" ]; then echo "ERROR: SSH_PRIVATE_KEY is empty (Amplify secrets not injected)"; exit 1; fi
         # Validate it's base64 of an OpenSSH key
         - echo "$SSH_PRIVATE_KEY" | base64 -d | head -n 1 | grep -q "BEGIN OPENSSH" || { echo "ERROR: SSH_PRIVATE_KEY is not valid base64 of an OpenSSH key"; exit 1; }
         # Write key file
