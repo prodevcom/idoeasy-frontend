@@ -109,6 +109,9 @@ const performSyncRolesIfNeeded = async (token: JWT) => {
  *
  * @see https://next-auth.js.org/configuration/options
  */
+
+const cookieDomain = process.env.APP_DOMAIN || undefined;
+
 export const authConfig = {
   providers: [
     Credentials({
@@ -214,40 +217,41 @@ export const authConfig = {
     },
   },
   // Fix for session persistence in production
-  ...(process.env.NODE_ENV === 'production' && {
-    cookies: {
-      sessionToken: {
-        name: 'authjs.session-token',
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          secure: true,
-          domain: process.env.APP_DOMAIN,
-        },
-      },
-      callbackUrl: {
-        name: 'authjs.callback-url',
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          secure: true,
-          domain: process.env.APP_DOMAIN,
-        },
-      },
-      csrfToken: {
-        name: 'authjs.csrf-token',
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          secure: true,
-          domain: process.env.APP_DOMAIN,
-        },
-      },
-    },
-  }),
+  cookies:
+    process.env.NODE_ENV === 'production'
+      ? {
+          sessionToken: {
+            name: '__Secure-next-auth.session-token',
+            options: {
+              httpOnly: true,
+              sameSite: 'lax',
+              path: '/',
+              secure: true,
+              ...(cookieDomain ? { domain: cookieDomain } : {}),
+            },
+          },
+          callbackUrl: {
+            name: 'next-auth.callback-url',
+            options: {
+              httpOnly: false,
+              sameSite: 'lax',
+              path: '/',
+              secure: true,
+              ...(cookieDomain ? { domain: cookieDomain } : {}),
+            },
+          },
+          csrfToken: {
+            name: 'next-auth.csrf-token',
+            options: {
+              httpOnly: false,
+              sameSite: 'lax',
+              path: '/',
+              secure: true,
+              ...(cookieDomain ? { domain: cookieDomain } : {}),
+            },
+          },
+        }
+      : undefined,
 } satisfies NextAuthConfig;
 
 export const { auth, handlers, signIn, signOut } = NextAuth(authConfig);
