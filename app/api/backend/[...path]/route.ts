@@ -7,8 +7,8 @@ import { getToken } from 'next-auth/jwt';
  * Base URL of your upstream API (must be provided at build/runtime).
  * Example: https://api.example.com/api/v1
  */
-const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
-const NEXT_PUBLIC_NEXTAUTH_SECRET = process.env.NEXT_PUBLIC_NEXTAUTH_SECRET!;
+const BACKEND_URL = process.env.BACKEND_URL!;
+const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET!;
 
 /** Allowed HTTP methods for this proxy endpoint. */
 const ALLOWED = new Set<Uppercase<string>>([
@@ -41,7 +41,7 @@ function methodAllowsBody(method: string): boolean {
 function buildUpstreamUrl(req: NextRequest, path: string[]): string {
   // `req.nextUrl.search` already includes the leading "?" (or empty string).
   const suffix = path.join('/');
-  return `${trimTrailingSlash(NEXT_PUBLIC_BACKEND_URL)}/${suffix}${req.nextUrl.search}`;
+  return `${trimTrailingSlash(BACKEND_URL)}/${suffix}${req.nextUrl.search}`;
 }
 
 function trimTrailingSlash(url: string): string {
@@ -84,7 +84,7 @@ function buildUpstreamHeaders(req: NextRequest, accessToken: string): Headers {
  */
 async function forwardToUpstream(req: NextRequest, path: string[]) {
   // 1) Authenticate via next-auth
-  const jwt = await getToken({ req, secret: NEXT_PUBLIC_NEXTAUTH_SECRET });
+  const jwt = await getToken({ req, secret: NEXTAUTH_SECRET });
   const accessToken = jwt?.accessToken as string | undefined;
 
   if (!accessToken) {
