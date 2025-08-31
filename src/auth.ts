@@ -144,12 +144,9 @@ export const authConfig = {
   ],
   pages: { signIn: '/login' },
 
-  // Fix for UntrustedHost error in production
-  trustHost: process.env.NEXTAUTH_TRUST_HOST === 'true',
-
-  // Fix for localhost redirects in production
-  basePath: process.env.NEXTAUTH_BASE_PATH || '/api/auth',
-
+  // Simplified configuration for production
+  trustHost: true, // Always trust host in production
+  
   // Fix for session persistence in production
   ...(process.env.NODE_ENV === 'production' && {
     cookies: {
@@ -160,7 +157,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          domain: '.amplifyapp.com', // Test with Amplify domain
+          domain: '.amplifyapp.com',
         },
       },
       callbackUrl: {
@@ -170,7 +167,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          domain: '.amplifyapp.com', // Test with Amplify domain
+          domain: '.amplifyapp.com',
         },
       },
       csrfToken: {
@@ -180,7 +177,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          domain: '.amplifyapp.com', // Test with Amplify domain
+          domain: '.amplifyapp.com',
         },
       },
     },

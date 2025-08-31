@@ -88,6 +88,9 @@ async function forwardToUpstream(req: NextRequest, path: string[]) {
   console.log('🔍 [Backend Proxy] Request URL:', req.url);
   console.log('🔍 [Backend Proxy] Request headers:', Object.fromEntries(req.headers.entries()));
 
+  console.log('🔍 [Backend Proxy] NEXTAUTH_SECRET present:', !!NEXTAUTH_SECRET);
+  console.log('🔍 [Backend Proxy] NEXTAUTH_SECRET length:', NEXTAUTH_SECRET?.length || 0);
+
   const jwt = await getToken({ req, secret: NEXTAUTH_SECRET });
   console.log('🔍 [Backend Proxy] JWT token:', jwt ? 'Present' : 'Missing');
   console.log('🔍 [Backend Proxy] JWT accessToken:', jwt?.accessToken ? 'Present' : 'Missing');
