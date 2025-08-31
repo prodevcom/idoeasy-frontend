@@ -186,6 +186,7 @@
             "yes": "Yes",
             "fullAdminAccess": "Full Admin access",
             "status": "Status",
+            "create": "Create Role",
             "save": "Save Role",
             "cancel": "Cancel"
         },
@@ -243,7 +244,8 @@
             "confirmPassword": "Confirm Password",
             "role": "Role",
             "status": "Status",
-            "save": "Create User",
+            "create": "Create User",
+            "save": "Save User",
             "cancel": "Cancel"
         },
         "status": {

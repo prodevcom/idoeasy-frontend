@@ -186,6 +186,7 @@
             "yes": "Sim",
             "fullAdminAccess": "Acesso total de administrador",
             "status": "Status",
+            "create": "Criar Função",
             "save": "Salvar Função",
             "cancel": "Cancelar"
         },
@@ -243,7 +244,8 @@
             "confirmPassword": "Confirmar Senha",
             "role": "Função",
             "status": "Status",
-            "save": "Criar Usuário",
+            "create": "Criar Usuário",
+            "save": "Salvar Usuário",
             "cancel": "Cancelar"
         },
         "status": {

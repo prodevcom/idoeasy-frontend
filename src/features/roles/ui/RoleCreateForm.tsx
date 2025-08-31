@@ -134,7 +134,7 @@ export function RoleCreateForm({ userRole }: RoleCreateFormProps) {
       <SubmitForm
         submitting={disabled}
         isValid={isValid}
-        onSubmitText={t('form.save')}
+        onSubmitText={t('form.create')}
         onCancelText={t('form.cancel')}
         onCancel={() => router.back()}
       />
