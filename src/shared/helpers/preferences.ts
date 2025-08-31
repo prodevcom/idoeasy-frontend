@@ -1,5 +1,3 @@
-import { getCookie, setCookie } from 'cookies-next';
-
 import type { User, UserPreferences } from '@entech/contracts';
 
 /**
@@ -20,9 +18,9 @@ export function getUserPreferences(user?: User | null): UserPreferences {
 
   if (typeof window !== 'undefined') {
     try {
-      cookieLocale = getCookie('pref_locale') as string | undefined;
-      cookieTimeZone = getCookie('pref_tz') as string | undefined;
-      const showOffsetCookie = getCookie('pref_show_tz_offset') as string | undefined;
+      cookieLocale = localStorage.getItem('pref_locale') as string | undefined;
+      cookieTimeZone = localStorage.getItem('pref_tz') as string | undefined;
+      const showOffsetCookie = localStorage.getItem('pref_show_tz_offset') as string | undefined;
       cookieShowTimezoneOffset = showOffsetCookie ? showOffsetCookie === 'true' : undefined;
     } catch {
       // Ignore cookie errors during SSR
@@ -96,35 +94,41 @@ export function saveUserPreferences(preferences: UserPreferences): void {
   // Only save cookies on client side
   if (typeof window !== 'undefined') {
     try {
+      console.log('🔧 [Preferences] Saving preferences:', preferences);
+      console.log('🔧 [Preferences] Environment:', process.env.NODE_ENV);
+
       if (preferences.locale) {
-        setCookie('pref_locale', preferences.locale, {
-          maxAge: 365 * 24 * 60 * 60, // 1 year
-          sameSite: 'lax',
-          secure: process.env.NODE_ENV === 'production',
-        });
+        localStorage.setItem('pref_locale', preferences.locale);
+        console.log('🔧 [Preferences] Saved locale cookie:', preferences.locale);
       }
 
       if (preferences.timeZone) {
-        setCookie('pref_tz', preferences.timeZone, {
-          maxAge: 365 * 24 * 60 * 60, // 1 year
-          sameSite: 'lax',
-          secure: process.env.NODE_ENV === 'production',
-        });
+        localStorage.setItem('pref_tz', preferences.timeZone);
+        console.log('🔧 [Preferences] Saved timezone cookie:', preferences.timeZone);
       }
 
       if (preferences.showTimezoneOffset !== undefined) {
-        setCookie('pref_show_tz_offset', preferences.showTimezoneOffset.toString(), {
-          maxAge: 365 * 24 * 60 * 60, // 1 year
-          sameSite: 'lax',
-          secure: process.env.NODE_ENV === 'production',
-        });
+        localStorage.setItem('pref_show_tz_offset', preferences.showTimezoneOffset.toString());
+        console.log(
+          '🔧 [Preferences] Saved showTimezoneOffset cookie:',
+          preferences.showTimezoneOffset,
+        );
       }
 
       // Optional: Save to localStorage for quick client-side access
-      localStorage.setItem('userPreferences', JSON.stringify(preferences));
+      try {
+        localStorage.setItem('userPreferences', JSON.stringify(preferences));
+        console.log('🔧 [Preferences] Saved to localStorage');
+      } catch (localStorageError) {
+        console.warn('Failed to save to localStorage:', localStorageError);
+      }
+
+      console.log('🔧 [Preferences] All preferences saved successfully');
     } catch (error) {
-      console.warn('Failed to save preferences:', error);
+      console.error('❌ [Preferences] Failed to save preferences:', error);
     }
+  } else {
+    console.log('🔧 [Preferences] Not in browser environment, skipping save');
   }
 }
 
@@ -312,8 +316,8 @@ function formatTimeZoneLabel(timeZone: string): string {
  * Clear user preferences from cookies and localStorage
  */
 export function clearUserPreferences(): void {
-  setCookie('pref_locale', '', { maxAge: -1 });
-  setCookie('pref_tz', '', { maxAge: -1 });
+  localStorage.removeItem('pref_locale');
+  localStorage.removeItem('pref_tz');
 
   if (typeof window !== 'undefined') {
     try {
