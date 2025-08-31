@@ -5,6 +5,10 @@ frontend:
     preBuild:
       commands:
         - "set -e"
+        - "echo '=== DEBUG: VERSÕES ==='"
+        - "node --version"
+        - "npm --version"
+        - "echo '=== DEBUG: SSH ==='"
         - "export AWS_DEFAULT_REGION=us-east-1"
         # Busca JSON do Secrets Manager
         - "SECRET_JSON=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-east-1:800572458310:secret:idoeasy-prod-env-UPzspI --query SecretString --output text)"
