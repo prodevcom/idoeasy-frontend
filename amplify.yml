@@ -30,6 +30,11 @@ frontend:
         - "npm ci --include=dev"
     build:
       commands:
+        # Clear all caches to ensure clean build
+        - "echo '=== CLEARING CACHES ==='"
+        - "rm -rf .next"
+        - "rm -rf node_modules/.cache"
+        - "npm cache clean --force"
         # Injecting environment variables from Secrets Manager (SSH)
         - "env | grep -E 'BACKEND_URL' >> .env.production"
         - "env | grep -E 'NEXTAUTH_URL' >> .env.production"
