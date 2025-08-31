@@ -36,6 +36,7 @@ frontend:
         - "rm -rf node_modules/.cache"
         - "npm cache clean --force"
         # Injecting environment variables from Secrets Manager (SSH)
+        - "env | grep -E 'APP_DOMAIN' >> .env.production"
         - "env | grep -E 'BACKEND_URL' >> .env.production"
         - "env | grep -E 'NEXTAUTH_URL' >> .env.production"
         - "env | grep -E 'NEXTAUTH_SECRET' >> .env.production"

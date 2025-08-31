@@ -223,7 +223,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          domain: '.amplifyapp.com',
+          domain: process.env.APP_DOMAIN,
         },
       },
       callbackUrl: {
@@ -233,7 +233,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          domain: '.amplifyapp.com',
+          domain: process.env.APP_DOMAIN,
         },
       },
       csrfToken: {
@@ -243,7 +243,7 @@ export const authConfig = {
           sameSite: 'lax',
           path: '/',
           secure: true,
-          domain: '.amplifyapp.com',
+          domain: process.env.APP_DOMAIN,
         },
       },
     },

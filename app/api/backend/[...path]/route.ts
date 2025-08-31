@@ -82,7 +82,7 @@ function buildUpstreamHeaders(req: NextRequest, accessToken: string): Headers {
  * to the client.
  */
 async function forwardToUpstream(req: NextRequest, path: string[]) {
-  const jwt = await getToken({ req });
+  const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const accessToken = jwt?.accessToken as string | undefined;
 
   if (!accessToken) {
