@@ -217,7 +217,7 @@ export const authConfig = {
   ...(process.env.NODE_ENV === 'production' && {
     cookies: {
       sessionToken: {
-        name: '__Secure-authjs.session-token', // NextAuth v5 naming
+        name: 'authjs.session-token',
         options: {
           httpOnly: true,
           sameSite: 'lax',
@@ -227,7 +227,7 @@ export const authConfig = {
         },
       },
       callbackUrl: {
-        name: '__Secure-authjs.callback-url', // NextAuth v5 naming
+        name: 'authjs.callback-url',
         options: {
           httpOnly: true,
           sameSite: 'lax',
@@ -237,7 +237,7 @@ export const authConfig = {
         },
       },
       csrfToken: {
-        name: '__Host-authjs.csrf-token', // NextAuth v5 naming
+        name: 'authjs.csrf-token',
         options: {
           httpOnly: true,
           sameSite: 'lax',
