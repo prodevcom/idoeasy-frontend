@@ -3,7 +3,7 @@
 import { Stack } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 
-import type { RoleWithPermissions } from '@entech/contracts';
+import type { RoleWithPermissions } from '@idoeasy/contracts';
 
 import { RoleCreateForm } from '@/features/roles/ui/RoleCreateForm';
 

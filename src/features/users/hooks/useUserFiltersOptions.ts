@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
-import type { UserStatus } from '@entech/contracts';
+import type { UserStatus } from '@idoeasy/contracts';
 
 import { searchRoles } from '@/features/roles';
 

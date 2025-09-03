@@ -1,4 +1,4 @@
-import type { User } from '@entech/contracts';
+import type { User } from '@idoeasy/contracts';
 
 import type { StatusResponse } from '@/shared/api';
 

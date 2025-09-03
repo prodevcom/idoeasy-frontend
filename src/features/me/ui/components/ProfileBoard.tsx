@@ -1,7 +1,7 @@
 import { Button, Stack, Tile } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { UserAvatarForm } from '@/shared/components/Forms';
 import { useModalContext } from '@/shared/contexts/ModalContext';

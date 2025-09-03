@@ -19,7 +19,7 @@ import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { AppLogo, AppSideNav, LOGO_SIZE } from '@/shared/components';
 

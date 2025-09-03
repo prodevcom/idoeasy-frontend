@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { createContext, memo, useContext, useEffect, useMemo, useState } from 'react';
 
-import type { UserPreferences } from '@entech/contracts';
+import type { UserPreferences } from '@idoeasy/contracts';
 
 import { useCurrentUser } from '@/features/me';
 

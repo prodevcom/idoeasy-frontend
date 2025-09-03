@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { SideNavDivider, SideNavItems, SideNavLink, Tag } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { useActivePath, useNav } from '@/shared/hooks';
 

@@ -83,14 +83,13 @@ function buildUpstreamHeaders(req: NextRequest, accessToken: string): Headers {
  */
 async function forwardToUpstream(req: NextRequest, path: string[]) {
   const isProduction = process.env.NODE_ENV === 'production';
-  const cookieName = isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token';
+  const cookieName = isProduction ? '__Secure-next-auth.session-token' : 'authjs.session-token';
 
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
     cookieName,
   });
-  console.log('🔍 [Backend Proxy] Token:', cookieName, token);
 
   // const session = await auth();
   const accessToken = token?.accessToken as string | undefined;

@@ -1,4 +1,4 @@
-import type { UpdateUserPreferencesRequest, User } from '@entech/contracts';
+import type { UpdateUserPreferencesRequest, User } from '@idoeasy/contracts';
 
 import type { ApiSuccess } from '@/shared/api';
 import { api, ENDPOINTS } from '@/shared/api';

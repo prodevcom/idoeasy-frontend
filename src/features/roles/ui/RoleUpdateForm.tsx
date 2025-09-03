@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
-import type { RoleWithPermissions, UpdateRoleRequest } from '@entech/contracts';
+import type { RoleWithPermissions, UpdateRoleRequest } from '@idoeasy/contracts';
 
 import { useRoleUpsert } from '@/features/roles/hooks/useRoleUpsert';
 import { PermissionField, SubmitForm, TextField } from '@/shared/components';

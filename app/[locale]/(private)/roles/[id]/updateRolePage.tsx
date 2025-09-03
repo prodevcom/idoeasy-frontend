@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { Stack } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 
-import type { RoleWithPermissions } from '@entech/contracts';
+import type { RoleWithPermissions } from '@idoeasy/contracts';
 
 import { RoleUpdateForm } from '@/features/roles/ui';
 

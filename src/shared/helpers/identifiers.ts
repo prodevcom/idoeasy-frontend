@@ -1,4 +1,4 @@
-// import { OrganizationIdType } from '@entech/contracts';
+// import { OrganizationIdType } from '@idoeasy/contracts';
 
 // export function validateIdentifier(kind: OrganizationIdType, value: string): boolean {
 //   const v = (value || '').trim();

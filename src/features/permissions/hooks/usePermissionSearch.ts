@@ -10,7 +10,7 @@ import { useDebounce } from '@/shared/hooks';
 
 import { defaults, permissionsQS } from './queryParams';
 
-import type { Permission, PermissionQueryParams } from '@entech/contracts';
+import type { Permission, PermissionQueryParams } from '@idoeasy/contracts';
 
 export function usePermissionSearch() {
   const router = useRouter();

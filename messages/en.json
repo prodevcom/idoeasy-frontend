@@ -228,8 +228,6 @@
         "actions": {
             "actions": "Actions",
             "create": "Create",
-            "edit": "Edit",
-            "deactivate": "Disable",
             "view": "View"
         },
         "pagination": {

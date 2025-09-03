@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 import createMiddleware from 'next-intl/middleware';
 
-import type { AuthUser, Permission } from '@entech/contracts';
+import type { AuthUser, Permission } from '@idoeasy/contracts';
 
 import { defaultLocale, locales, type Locale } from './i18n';
 

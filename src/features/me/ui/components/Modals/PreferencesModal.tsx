@@ -18,7 +18,7 @@ import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import type { UserPreferences } from '@entech/contracts';
+import type { UserPreferences } from '@idoeasy/contracts';
 
 import { getSupportedLocales, getSupportedTimeZones } from '@/shared/helpers/preferences';
 import { useMeValidationSchemas } from '@/shared/validations';

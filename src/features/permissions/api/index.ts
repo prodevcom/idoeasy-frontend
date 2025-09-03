@@ -1,4 +1,4 @@
-import type { Permission, PermissionQueryParams } from '@entech/contracts';
+import type { Permission, PermissionQueryParams } from '@idoeasy/contracts';
 
 import type { ApiSuccess } from '@/shared/api';
 import { api, ENDPOINTS } from '@/shared/api';

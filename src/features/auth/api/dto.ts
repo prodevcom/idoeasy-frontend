@@ -1,4 +1,4 @@
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 export type LoginInput = {
   email: string;

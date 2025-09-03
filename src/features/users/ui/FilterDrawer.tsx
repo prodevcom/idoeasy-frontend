@@ -14,7 +14,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import type { UserStatus } from '@entech/contracts';
+import type { UserStatus } from '@idoeasy/contracts';
 
 import { useUserFiltersOptions } from '../hooks';
 

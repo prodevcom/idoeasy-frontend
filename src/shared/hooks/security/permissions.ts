@@ -1,7 +1,7 @@
 import type { Authorizer } from '@/shared/domain';
 import { PermissionActions } from '@/shared/domain';
 
-import type { AuthUser, Permission } from '@entech/contracts';
+import type { AuthUser, Permission } from '@idoeasy/contracts';
 
 export function createAuthorizer(moduleKey: string, currentUser?: AuthUser): Authorizer {
   const perms = currentUser?.role?.permissions ?? [];

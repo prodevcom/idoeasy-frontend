@@ -102,7 +102,7 @@ export default [
             { pattern: '@/**', group: 'internal', position: 'before' },
 
             // ensure external packages are considered after local paths
-            { pattern: '@entech/contracts', group: 'external', position: 'after' },
+            { pattern: '@idoeasy/contracts', group: 'external', position: 'after' },
             { pattern: 'axios', group: 'external', position: 'after' },
 
             // put local DTO *type* imports first within the 'type' group

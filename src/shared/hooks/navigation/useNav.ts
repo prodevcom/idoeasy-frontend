@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { AuthUser, Permission } from '@entech/contracts';
+import type { AuthUser, Permission } from '@idoeasy/contracts';
 
 import { NAV_ITEMS, type NavOptions } from './constants';
 

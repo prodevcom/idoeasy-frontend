@@ -1,7 +1,7 @@
 import NextAuth, { type NextAuthConfig, type Session } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
-import type { Authentication, AuthUser, User } from '@entech/contracts';
+import type { Authentication, AuthUser, User } from '@idoeasy/contracts';
 
 import { backend } from '@/server';
 import type { ApiSuccess } from '@/shared/api';

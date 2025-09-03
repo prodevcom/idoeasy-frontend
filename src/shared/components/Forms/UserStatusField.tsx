@@ -2,7 +2,7 @@ import { ComboBox } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 import { Controller } from 'react-hook-form';
 
-import { UserStatus } from '@entech/contracts';
+import { UserStatus } from '@idoeasy/contracts';
 
 import { capitalizeWords } from '@/shared/helpers';
 

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
-import type { ChangePasswordRequest } from '@entech/contracts';
+import type { ChangePasswordRequest } from '@idoeasy/contracts';
 
 import { changePassword } from '@/features/me/api';
 

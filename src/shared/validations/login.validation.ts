@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { LoginRequest } from '@entech/contracts';
+import type { LoginRequest } from '@idoeasy/contracts';
 
 export const LoginSchema = z.object({
   email: z.email(),

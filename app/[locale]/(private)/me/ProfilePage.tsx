@@ -3,7 +3,7 @@
 import { Stack } from '@carbon/react';
 import { useEffect } from 'react';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { ProfileBoard, ProfileDetails } from '@/features/me/ui/components';
 import { useNotificationHelpers } from '@/shared/contexts';

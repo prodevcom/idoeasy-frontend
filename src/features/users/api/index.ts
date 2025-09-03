@@ -3,7 +3,7 @@ import type {
   UpdateUserRequest,
   User,
   UserQueryParams,
-} from '@entech/contracts';
+} from '@idoeasy/contracts';
 
 import type { ApiSuccess } from '@/shared/api';
 import { api, ENDPOINTS } from '@/shared/api';

@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 
-import { type CreateUserRequest, type User } from '@entech/contracts';
+import { type CreateUserRequest, type User } from '@idoeasy/contracts';
 
 import {
   PasswordField,
@@ -19,12 +19,12 @@ import {
 import { applyFormErrors, isRequired, parseApiErrors } from '@/shared/helpers';
 import { useUserValidationSchemas } from '@/shared/validations';
 
-import { useUserUpsert } from '../hooks';
+import { useUserCreate } from '../hooks';
 
 export function UserCreateForm() {
   const router = useRouter();
   const t = useTranslations('users');
-  const { defaults, submit, isLoading } = useUserUpsert();
+  const { defaults, submit, isLoading } = useUserCreate();
   const { CreateUserSchema } = useUserValidationSchemas();
 
   const {

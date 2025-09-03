@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { Button, Stack } from '@carbon/react';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 type HomePageProps = {
   user?: AuthUser;

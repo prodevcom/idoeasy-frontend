@@ -1,4 +1,4 @@
-import type { Role, RoleQueryParams, RoleWithPermissions } from '@entech/contracts';
+import type { Role, RoleQueryParams, RoleWithPermissions } from '@idoeasy/contracts';
 
 import type { CreateRolePayload, RoleResponse, UpdateRolePayload } from '@/features/roles/api/dto';
 import type { ApiSuccess } from '@/shared/api';

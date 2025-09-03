@@ -1,6 +1,6 @@
 import { Tile } from '@carbon/react';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { ProfileDetailsAuditDataTable } from './DataTables/AuditDataTable';
 

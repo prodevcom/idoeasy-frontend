@@ -4,7 +4,7 @@ import { ComboBox } from '@carbon/react';
 import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
 
-import type { Role } from '@entech/contracts';
+import type { Role } from '@idoeasy/contracts';
 
 import { searchRoles } from '@/features/roles';
 

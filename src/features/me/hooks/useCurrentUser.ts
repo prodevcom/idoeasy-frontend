@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
-import type { User } from '@entech/contracts';
+import type { User } from '@idoeasy/contracts';
 
 import { getUserPreferences, saveUserPreferences } from '@/shared/helpers/preferences';
 

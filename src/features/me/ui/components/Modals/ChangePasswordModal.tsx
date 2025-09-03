@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { ChangePasswordRequest } from '@entech/contracts';
+import type { ChangePasswordRequest } from '@idoeasy/contracts';
 
 import { useChangePassword } from '@/features/me';
 import { PasswordField } from '@/shared/components';

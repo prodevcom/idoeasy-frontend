@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import type { User, UserPreferences } from '@entech/contracts';
+import type { User, UserPreferences } from '@idoeasy/contracts';
 
 import type { ApiClientError } from '@/shared/api/types';
 import { getUserPreferences, saveUserPreferences } from '@/shared/helpers/preferences';

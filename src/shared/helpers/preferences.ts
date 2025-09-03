@@ -1,4 +1,4 @@
-import type { User, UserPreferences } from '@entech/contracts';
+import type { User, UserPreferences } from '@idoeasy/contracts';
 
 /**
  * Get user preferences from multiple sources in priority order:

@@ -1,6 +1,6 @@
 import { formatDate, getUserPreferences } from './preferences';
 
-import type { UserPreferences } from '@entech/contracts';
+import type { UserPreferences } from '@idoeasy/contracts';
 
 type WithId<T> = Omit<T, 'id'> & { id: string };
 

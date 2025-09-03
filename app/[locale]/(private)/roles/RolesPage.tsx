@@ -1,6 +1,6 @@
 'use client';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { RoleDataTables } from '@/features/roles';
 import { createAuthorizer } from '@/shared/hooks';

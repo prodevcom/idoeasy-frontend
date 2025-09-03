@@ -2,7 +2,7 @@
 
 import { Content, HeaderContainer } from '@carbon/react';
 
-import type { AuthUser } from '@entech/contracts';
+import type { AuthUser } from '@idoeasy/contracts';
 
 import { AppHeader, GlobalModal, NotificationsContainer } from '@/shared/components';
 import Breadcrumb from '@/shared/components/Breadcrumb/Breadcrumb';

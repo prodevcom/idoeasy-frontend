@@ -9,7 +9,7 @@ import { useDebounce } from '@/shared/hooks';
 import { searchRoles } from '../api';
 import { defaults, rolesQS } from './queryParams';
 
-import type { RoleQueryParams } from '@entech/contracts';
+import type { RoleQueryParams } from '@idoeasy/contracts';
 
 export function useRolesSearch() {
   const router = useRouter();

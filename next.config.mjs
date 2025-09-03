@@ -8,7 +8,7 @@ const nextConfig = {
   sassOptions: {
     quietDeps: true,
   },
-  transpilePackages: ['@entech/contracts'],
+  transpilePackages: ['@idoeasy/contracts'],
   experimental: {
     externalDir: true,
   },

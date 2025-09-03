@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 import { useController, type Control } from 'react-hook-form';
 
-import type { RoleWithPermissions } from '@entech/contracts';
+import type { RoleWithPermissions } from '@idoeasy/contracts';
 
 import { searchPermissions } from '@/features/permissions/api';
 

@@ -1,3 +1,3 @@
 export * from './useUserFiltersOptions';
 export * from './useUserSearch';
-export * from './useUserUpsert';
+export * from './useUsers';

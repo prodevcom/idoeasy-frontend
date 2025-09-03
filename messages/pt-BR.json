@@ -228,8 +228,6 @@
         "actions": {
             "actions": "Ações",
             "create": "Criar",
-            "edit": "Editar",
-            "deactivate": "Desativar",
             "view": "Visualizar"
         },
         "pagination": {

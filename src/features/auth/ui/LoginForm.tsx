@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import { memo, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { LoginRequest } from '@entech/contracts';
+import type { LoginRequest } from '@idoeasy/contracts';
 
 import { PasswordField, SubmitButton, TextField } from '@/shared/components';
 import { isRequired } from '@/shared/helpers';

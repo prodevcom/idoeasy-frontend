@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { AuthUser, UpdateMeRequest } from '@entech/contracts';
+import type { AuthUser, UpdateMeRequest } from '@idoeasy/contracts';
 
 import { useUpdateUserInfos } from '@/features/me/hooks/useUpdateUserInfos';
 import { SubmitButton, TextField } from '@/shared/components';

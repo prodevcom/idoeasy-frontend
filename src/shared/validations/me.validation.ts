@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';
 
-import type { ChangePasswordRequest, UpdateMeRequest, UserPreferences } from '@entech/contracts';
+import type { ChangePasswordRequest, UpdateMeRequest, UserPreferences } from '@idoeasy/contracts';
 
 export const useMeValidationSchemas = () => {
   const t = useTranslations('profile');

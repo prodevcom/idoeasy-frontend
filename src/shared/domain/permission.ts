@@ -1,4 +1,4 @@
-import type { Permission } from '@entech/contracts';
+import type { Permission } from '@idoeasy/contracts';
 
 /**
  * This PermissionActions is used only for navigation purposes.

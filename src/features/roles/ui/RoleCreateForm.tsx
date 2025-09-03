@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
-import type { CreateRoleRequest, Role, RoleWithPermissions } from '@entech/contracts';
+import type { CreateRoleRequest, Role, RoleWithPermissions } from '@idoeasy/contracts';
 
 import { useRoleUpsert } from '@/features/roles/hooks/useRoleUpsert';
 import { PermissionField, RolesField, SubmitForm, TextField } from '@/shared/components';
@@ -37,8 +37,8 @@ export function RoleCreateForm({ userRole }: RoleCreateFormProps) {
     handleSubmit,
     formState: { isSubmitting, isValid, errors },
     reset,
-  } = useForm({
-    defaultValues: defaults as CreateRoleRequest,
+  } = useForm<CreateRoleRequest>({
+    defaultValues: defaults,
     resolver: zodResolver(CreateRoleSchema),
     mode: 'onChange',
   });

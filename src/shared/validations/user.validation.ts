@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';
 
-import type { CreateUserRequest, UpdateUserRequest } from '@entech/contracts';
-import { UserStatus } from '@entech/contracts';
+import type { CreateUserRequest, UpdateUserRequest } from '@idoeasy/contracts';
+import { UserStatus } from '@idoeasy/contracts';
 
 import { zodEnumFromConstUIRequired } from '../helpers';
 

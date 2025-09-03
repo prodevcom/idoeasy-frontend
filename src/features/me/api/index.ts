@@ -1,4 +1,4 @@
-import type { AuditLog, ChangePasswordRequest, UpdateMeRequest, User } from '@entech/contracts';
+import type { AuditLog, ChangePasswordRequest, UpdateMeRequest, User } from '@idoeasy/contracts';
 
 import type { ApiSuccess } from '@/shared/api';
 import { api } from '@/shared/api/api';

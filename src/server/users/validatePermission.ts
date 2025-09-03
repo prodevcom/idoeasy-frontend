@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import 'server-only';
 
-import type { Permission, RoleWithPermissions } from '@entech/contracts';
+import type { Permission, RoleWithPermissions } from '@idoeasy/contracts';
 
 import { ENDPOINTS } from '@/shared/api/endpoints';
 

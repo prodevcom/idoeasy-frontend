@@ -23,7 +23,7 @@ import { capitalizeWords, getDirection, onSetTextFieldValueChanged } from '@/sha
 import { useMapToDataTables } from '@/shared/hooks';
 
 import { useUserFiltersOptions, useUserSearch } from '../hooks';
-import { AddNewUser, Filters, UserUpdateAction } from './DataTables';
+import { AddNewUser, Filters, ViewUserAction } from './DataTables';
 import { FilterDrawer } from './FilterDrawer';
 
 type UserDataTableProps = {
@@ -172,7 +172,7 @@ export function UserDataTable({ authorizer }: UserDataTableProps) {
                             </TableCell>
                           );
                         })}
-                        <UserUpdateAction
+                        <ViewUserAction
                           userId={row.id}
                           authorizer={authorizer}
                           forceDisabled={disableActionByAdminRules(row.id)}
