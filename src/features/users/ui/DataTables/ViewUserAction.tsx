@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 
-import { View } from '@carbon/icons-react';
-import { Button, TableCell } from '@carbon/react';
+import { OverflowMenu, OverflowMenuItem, TableCell } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 
 import type { Authorizer } from '@/shared/domain';
@@ -17,20 +16,43 @@ export const ViewUserAction = ({
 }) => {
   const router = useRouter();
   const t = useTranslations('users');
+
+  const handleUpdate = () => {
+    router.push(`/users/${userId}/edit`);
+  };
+
+  const handleView = () => {
+    router.push(`/users/${userId}`);
+  };
+
+  const handleDisable = () => {};
+
   return (
     <TableCell key={`actions`} aria-label="user-actions" className="actions-col">
-      {!forceDisabled && (
-        <Button
-          hasIconOnly
-          kind="ghost"
-          onClick={() => router.push(`/users/${userId}`)}
-          aria-label={t('actions.view')}
-          disabled={forceDisabled || !authorizer.canUpdate()}
-          iconDescription={t('actions.view')}
-        >
-          <View />
-        </Button>
-      )}
+      <OverflowMenu iconDescription={t('actions.actions')} align="left" flipped>
+        {authorizer.canRead() && (
+          <OverflowMenuItem
+            disabled={forceDisabled}
+            itemText={t('actions.view')}
+            onClick={handleView}
+          />
+        )}
+        {authorizer.canUpdate() && (
+          <OverflowMenuItem
+            disabled={forceDisabled}
+            itemText={t('actions.edit')}
+            onClick={handleUpdate}
+          />
+        )}
+        {authorizer.canDelete() && (
+          <OverflowMenuItem
+            disabled={forceDisabled}
+            itemText={t('actions.disable')}
+            onClick={handleDisable}
+            isDelete
+          />
+        )}
+      </OverflowMenu>
     </TableCell>
   );
 };

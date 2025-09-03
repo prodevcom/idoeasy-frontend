@@ -18,7 +18,7 @@
         "admin": "Admin"
     },
     "breadcrumbs": {
-        "dashboard": "Dashboard",
+        "dash": "Dashboard",
         "users": "Users",
         "roles": "Roles",
         "permissions": "Permissions",
@@ -228,7 +228,9 @@
         "actions": {
             "actions": "Actions",
             "create": "Create",
-            "view": "View"
+            "edit": "Edit",
+            "view": "Open Profile",
+            "disable": "Disable"
         },
         "pagination": {
             "perPage": "Users per page",

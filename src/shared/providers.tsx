@@ -4,7 +4,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { memo, useState } from 'react';
 
 import { PreferencesInitializer } from './components';
-import { ModalProvider, NotificationsProvider, PreferencesProvider } from './contexts';
+import {
+  BreadcrumbProvider,
+  ModalProvider,
+  NotificationsProvider,
+  PreferencesProvider,
+} from './contexts';
 
 import type { ReactNode } from 'react';
 
@@ -76,7 +81,9 @@ export const InternalProviders = memo(function InternalProviders({
       <NotificationsProvider>
         <PreferencesProvider>
           <PreferencesInitializer>
-            <ModalProvider>{children}</ModalProvider>
+            <ModalProvider>
+              <BreadcrumbProvider>{children}</BreadcrumbProvider>
+            </ModalProvider>
           </PreferencesInitializer>
         </PreferencesProvider>
       </NotificationsProvider>

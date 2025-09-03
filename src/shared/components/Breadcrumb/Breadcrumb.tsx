@@ -1,77 +1,81 @@
 'use client';
 
+import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { BreadcrumbItem, Breadcrumb as CarbonBreadcrumb, Link } from '@carbon/react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
+import { useBreadcrumbs } from '@/shared/contexts';
+
+/* ------------------------ Helpers ------------------------ */
+
+function isLocale(seg?: string) {
+  return !!seg && seg.length === 2;
+}
+
+function isId(seg: string) {
+  return /^[a-f0-9]{24}$/i.test(seg) || /^[0-9a-f-]+$/i.test(seg);
+}
+
+function buildHref(segments: string[], index: number) {
+  return '/' + segments.slice(0, index + 1).join('/');
+}
+
+function prettify(s: string) {
+  return decodeURIComponent(s)
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+/* -------------------------------- Breadcrumb -------------------------------- */
+
 const Breadcrumb = () => {
   const pathname = usePathname();
   const t = useTranslations('breadcrumbs');
+  const { getBreadcrumbLabel } = useBreadcrumbs();
 
-  // Break the url into segments
   const segments = pathname.split('/').filter(Boolean);
+  const segs = isLocale(segments[0]) ? segments.slice(1) : segments;
 
-  // Remove the first segment (locale)
-  const segmentsWithoutLocale = segments.slice(1);
+  const items = useMemo(() => {
+    return segs.map((segment, i) => {
+      const prev = i > 0 ? segs[i - 1] : undefined;
+      const isLast = i === segs.length - 1;
 
-  // Build the href without the locale
-  const buildHref = (index: number) => '/' + segmentsWithoutLocale.slice(0, index + 1).join('/');
+      const override = getBreadcrumbLabel(segment, prev);
 
-  // Intelligent breadcrumb translation
-  const getBreadcrumbText = (segment: string, index: number, allSegments: string[]) => {
-    // Handle special cases first
-    if (segment === 'me') return t('me');
-    if (segment === 'create') return t('create');
-    if (segment === 'edit') return t('edit');
-    if (segment === 'view') return t('view');
+      if (override) {
+        return { href: buildHref(segs, i), text: override, isLast };
+      }
 
-    // Handle main sections
-    if (segment === 'dash') return t('dashboard');
-    if (segment === 'users') return t('users');
-    if (segment === 'roles') return t('roles');
-    if (segment === 'permissions') return t('permissions');
+      if (isId(segment)) {
+        return { href: buildHref(segs, i), text: segment, isLast };
+      }
 
-    // Handle dynamic segments (IDs, etc.)
-    if (segment.match(/^[a-f0-9]{24}$/i)) {
-      // MongoDB ObjectId - check context
-      const previousSegment = allSegments[index - 1];
-      if (previousSegment === 'users') return t('view');
-      if (previousSegment === 'roles') return t('view');
-      return t('view');
-    }
+      let text = '-';
+      try {
+        text = t(segment);
+      } catch {
+        text = prettify(segment);
+      }
 
-    // Handle other dynamic segments
-    if (segment.match(/^[0-9a-f-]+$/i)) {
-      // UUID or similar - check context
-      const previousSegment = allSegments[index - 1];
-      if (previousSegment === 'users') return t('view');
-      if (previousSegment === 'roles') return t('view');
-      return t('view');
-    }
-
-    // Fallback: format the segment nicely
-    return decodeURIComponent(segment)
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-  };
-
-  // Memoize breadcrumb items for performance
-  const breadcrumbItems = useMemo(() => {
-    return segmentsWithoutLocale.map((segment, i) => ({
-      segment,
-      href: buildHref(i),
-      text: getBreadcrumbText(segment, i, segmentsWithoutLocale),
-      isLast: i === segmentsWithoutLocale.length - 1,
-    }));
-  }, [segmentsWithoutLocale]);
+      return { href: buildHref(segs, i), text, isLast };
+    });
+  }, [segs, t, getBreadcrumbLabel]);
 
   return (
     <CarbonBreadcrumb style={{ marginBottom: '1rem' }}>
-      {breadcrumbItems.map((item, i) => (
-        <BreadcrumbItem key={i}>
-          {item.isLast ? <span>{item.text}</span> : <Link href={item.href}>{item.text}</Link>}
+      {items.map((item, i) => (
+        <BreadcrumbItem key={i} isCurrentPage={item.isLast}>
+          {item.isLast ? (
+            <span aria-current="page">{item.text}</span>
+          ) : (
+            <Link as={NextLink} href={item.href}>
+              {item.text}
+            </Link>
+          )}
         </BreadcrumbItem>
       ))}
     </CarbonBreadcrumb>

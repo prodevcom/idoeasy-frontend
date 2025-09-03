@@ -18,7 +18,7 @@
         "admin": "Admin"
     },
     "breadcrumbs": {
-        "dashboard": "Painel",
+        "dash": "Painel",
         "users": "Usuários",
         "roles": "Funções",
         "permissions": "Permissões",
@@ -167,8 +167,8 @@
             "actions": "Ações",
             "create": "Criar",
             "edit": "Editar",
-            "delete": "Desativar",
-            "view": "Visualizar"
+            "view": "Abrir Perfil",
+            "disable": "Desativar"
         },
         "pagination": {
             "perPage": "Funções por página",
@@ -228,7 +228,8 @@
         "actions": {
             "actions": "Ações",
             "create": "Criar",
-            "view": "Visualizar"
+            "view": "Visualizar",
+            "disable": "Desativar"
         },
         "pagination": {
             "perPage": "Usuários por página",

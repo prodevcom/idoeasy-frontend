@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import type { AuthUser, UpdateUserRequest } from '@idoeasy/contracts';
 
 import { RolesField, SubmitForm, TextField, UserStatusField } from '@/shared/components';
+import { useBreadcrumbs } from '@/shared/contexts';
 import { applyFormErrors, isRequired, parseApiErrors } from '@/shared/helpers';
 import { useUserValidationSchemas } from '@/shared/validations';
 
@@ -27,6 +28,7 @@ export function UpdateUserForm({ uid, currentUser }: UserFormProps) {
 
   /* ------------------------------ Hooks ------------------------------ */
   const t = useTranslations('users');
+  const { setBreadcrumbLabel } = useBreadcrumbs();
   const [isTransitionPending, startTransition] = useTransition();
   const { UpdateUserSchema } = useUserValidationSchemas();
   const { defaultValues, submit, isUpdating, isLoading, isReady } = useUserUpdate(uid);
@@ -50,7 +52,8 @@ export function UpdateUserForm({ uid, currentUser }: UserFormProps) {
     reset((currentValues) => {
       return isEqual(currentValues, defaultValues) ? currentValues : defaultValues;
     });
-  }, [isReady, defaultValues, reset, isSubmitting, isTransitionPending]);
+    setBreadcrumbLabel({ segment: uid, prev: 'users', label: defaultValues.name || '-' });
+  }, [isReady, defaultValues, reset, isSubmitting, isTransitionPending, setBreadcrumbLabel, uid]);
 
   // Prefetch the users page
   useEffect(() => {
