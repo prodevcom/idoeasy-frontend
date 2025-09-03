@@ -3,13 +3,13 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { startTransition, useEffect, useMemo, useRef, useState } from 'react';
 
+import type { RoleQueryParams } from '@idoeasy/contracts';
+
 import { parseIntSafe } from '@/shared/helpers';
 import { useDebounce } from '@/shared/hooks';
 
 import { searchRoles } from '../api';
 import { defaults, rolesQS } from './queryParams';
-
-import type { RoleQueryParams } from '@idoeasy/contracts';
 
 export function useRolesSearch() {
   const router = useRouter();
@@ -87,8 +87,9 @@ export function useRolesSearch() {
         sortOrder,
       } as RoleQueryParams),
     placeholderData: keepPreviousData,
+    staleTime: 0,
+    refetchOnMount: 'always',
     refetchOnWindowFocus: false,
-    staleTime: 30_000,
   });
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
