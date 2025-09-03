@@ -21,7 +21,7 @@ const DEFAULTS_CREATE: CreateUserRequest = Object.freeze({
   name: '',
   email: '',
   password: '',
-  role: '',
+  roleId: '',
   status: 'ACTIVE',
 });
 
@@ -29,7 +29,7 @@ const DEFAULTS_CREATE: CreateUserRequest = Object.freeze({
 const DEFAULTS_UPDATE_LOADING: UpdateUserRequest = Object.freeze({
   name: '',
   email: '',
-  role: '',
+  roleId: '',
   status: 'ACTIVE',
 });
 
@@ -37,15 +37,15 @@ function toUpdateDefaults(u: User): UpdateUserRequest {
   return {
     name: u.name ?? '',
     email: u.email ?? '',
-    role: u.role?.id ?? '',
+    roleId: u.role?.id ?? '',
     status: u.status ?? 'ACTIVE',
   };
 }
 
 /* ------------------------------- useUserCreate ------------------------------ */
 export function useUserCreate(): {
-  isLoading: boolean;
-  defaults: CreateUserRequest;
+  isCreating: boolean;
+  defaultValues: CreateUserRequest;
   submit: (values: CreateUserRequest) => Promise<CreateResult>;
 } {
   const qc = useQueryClient();
@@ -62,8 +62,8 @@ export function useUserCreate(): {
 
   // defaults are a frozen constant — stable by reference:
   return {
-    isLoading: mutation.isPending,
-    defaults: DEFAULTS_CREATE,
+    isCreating: mutation.isPending,
+    defaultValues: DEFAULTS_CREATE,
     submit: mutation.mutateAsync,
   };
 }
@@ -71,7 +71,7 @@ export function useUserCreate(): {
 /* ------------------------------- useUserUpdate ------------------------------ */
 export function useUserUpdate(id: string): {
   submit: (values: UpdateUserRequest) => Promise<UpdateResult>;
-  defaults: UpdateUserRequest;
+  defaultValues: UpdateUserRequest;
   isUpdating: boolean;
   isLoading: boolean;
   isReady: boolean;
@@ -91,7 +91,7 @@ export function useUserUpdate(id: string): {
   });
 
   // Only create a new defaults object when the underlying user object changes.
-  const defaults = useMemo<UpdateUserRequest>(() => {
+  const defaultValues = useMemo<UpdateUserRequest>(() => {
     if (userQuery.data) return toUpdateDefaults(userQuery.data);
     return DEFAULTS_UPDATE_LOADING;
   }, [userQuery.data]);
@@ -107,7 +107,7 @@ export function useUserUpdate(id: string): {
   });
 
   return {
-    defaults,
+    defaultValues,
     isLoading: userQuery.isLoading || mutation.isPending,
     isReady: Boolean(userQuery.data),
     submit: mutation.mutateAsync,

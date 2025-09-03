@@ -29,11 +29,12 @@ export function UpdateUserForm({ uid, currentUser }: UserFormProps) {
   const t = useTranslations('users');
   const [isTransitionPending, startTransition] = useTransition();
   const { UpdateUserSchema } = useUserValidationSchemas();
-  const { defaults, submit, isUpdating, isLoading, isReady } = useUserUpdate(uid);
-  const { control, handleSubmit, setError, formState, reset } = useForm({
-    defaultValues: defaults as UpdateUserRequest,
-    resolver: zodResolver(UpdateUserSchema),
+  const { defaultValues, submit, isUpdating, isLoading, isReady } = useUserUpdate(uid);
+
+  const { control, handleSubmit, setError, formState, reset } = useForm<UpdateUserRequest>({
     mode: 'onChange',
+    defaultValues,
+    resolver: zodResolver(UpdateUserSchema),
   });
 
   /* ------------------------------ Keys ------------------------------ */
@@ -47,9 +48,9 @@ export function UpdateUserForm({ uid, currentUser }: UserFormProps) {
     if (!isReady) return;
     if (isSubmitting || isTransitionPending) return;
     reset((currentValues) => {
-      return isEqual(currentValues, defaults) ? currentValues : defaults;
+      return isEqual(currentValues, defaultValues) ? currentValues : defaultValues;
     });
-  }, [isReady, defaults, reset, isSubmitting, isTransitionPending]);
+  }, [isReady, defaultValues, reset, isSubmitting, isTransitionPending]);
 
   // Prefetch the users page
   useEffect(() => {
@@ -109,12 +110,12 @@ export function UpdateUserForm({ uid, currentUser }: UserFormProps) {
 
         {/* Role */}
         <RolesField
-          name="role"
+          name="roleId"
           control={control}
           errors={errors}
           titleText={t('form.role')}
           disabled={disabled || editingMySelf}
-          required={isRequired(UpdateUserSchema, 'role')}
+          required={isRequired(UpdateUserSchema, 'roleId')}
         />
       </Stack>
 
