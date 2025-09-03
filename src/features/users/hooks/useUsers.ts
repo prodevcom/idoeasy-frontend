@@ -7,16 +7,18 @@ import type { CreateUserRequest, UpdateUserRequest } from '@idoeasy/contracts';
 
 import { createUser, getUser, updateUser } from '../api';
 
+/* ----------------------------- Support types ---------------------------- */
 type User = Awaited<ReturnType<typeof getUser>>;
 type CreateResult = Awaited<ReturnType<typeof createUser>>;
 type UpdateResult = Awaited<ReturnType<typeof updateUser>>;
 
+/* ----------------------------- Query Keys ---------------------------- */
 export const qk = {
   user: (id: string): QueryKey => ['user', id],
   users: ['users'] as const,
 };
 
-// Keep these as module-level constants to preserve reference identity.
+/* ----------------------------- Defaults ---------------------------- */
 const DEFAULTS_CREATE: CreateUserRequest = Object.freeze({
   name: '',
   email: '',
@@ -25,7 +27,6 @@ const DEFAULTS_CREATE: CreateUserRequest = Object.freeze({
   status: 'ACTIVE',
 });
 
-// Use a frozen object for “loading” update defaults, also stable by reference.
 const DEFAULTS_UPDATE_LOADING: UpdateUserRequest = Object.freeze({
   name: '',
   email: '',

@@ -11,7 +11,7 @@ export function useRoleValidationSchemas() {
   const CreateRoleSchema = z.object({
     name: z.string().min(1, t('errors.nameRequired')),
     description: z.string().min(1, t('errors.descriptionRequired')),
-    permissions: z.array(z.string()).min(1, t('errors.permissionsRequired')),
+    permissionIds: z.array(z.string()).min(1, t('errors.permissionsRequired')),
     isActive: z.boolean(),
     isAdmin: z.boolean(),
     parentId: z.string().optional(),
@@ -20,7 +20,7 @@ export function useRoleValidationSchemas() {
   const UpdateRoleSchema = z.object({
     name: z.string().min(1, t('errors.nameRequired')),
     description: z.string().min(1, t('errors.descriptionRequired')),
-    permissions: z.array(z.string()).min(1, t('errors.permissionsRequired')),
+    permissionIds: z.array(z.string()).min(1, t('errors.permissionsRequired')),
     isActive: z.boolean(),
     isAdmin: z.boolean(),
   }) satisfies z.ZodType<UpdateRoleRequest>;

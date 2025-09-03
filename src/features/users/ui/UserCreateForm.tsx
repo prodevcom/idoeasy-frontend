@@ -116,7 +116,7 @@ export function UserCreateForm() {
 
       {/* Submit */}
       <SubmitForm
-        submitting={disabled || isCreating}
+        submitting={disabled}
         isValid={isValid}
         onSubmitText={t('form.create')}
         onCancelText={t('form.cancel')}

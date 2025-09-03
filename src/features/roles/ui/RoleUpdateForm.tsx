@@ -5,15 +5,15 @@ import { useRouter } from 'next/navigation';
 import { Column, Form, Grid, Stack } from '@carbon/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useTransition } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
 import type { RoleWithPermissions, UpdateRoleRequest } from '@idoeasy/contracts';
 
-import { useRoleUpsert } from '@/features/roles/hooks/useRoleUpsert';
+import { useRoleUpdate } from '@/features/roles/hooks/useRoles';
 import { PermissionField, SubmitForm, TextField } from '@/shared/components';
 import { ToggleField } from '@/shared/components/Forms/ToggleField';
-import { isRequired } from '@/shared/helpers';
+import { applyFormErrors, isRequired, parseApiErrors } from '@/shared/helpers';
 import { useRoleValidationSchemas } from '@/shared/validations/roles.validation';
 
 type RoleUpdateFormProps = {
@@ -23,36 +23,48 @@ type RoleUpdateFormProps = {
 
 export function RoleUpdateForm({ uuid, userRole }: RoleUpdateFormProps) {
   const router = useRouter();
+
+  /* ------------------------------ Hooks ------------------------------ */
   const t = useTranslations('roles');
-  const { defaults, submit, isLoading } = useRoleUpsert(uuid);
+  const [isTransitionPending, startTransition] = useTransition();
+  const { defaultValues, submit, isUpdating } = useRoleUpdate(uuid);
   const { UpdateRoleSchema } = useRoleValidationSchemas();
 
-  // Submit
-  const submitForm = async (values: UpdateRoleRequest) => {
-    await submit(values);
-    router.back();
-  };
-
-  // Form Hooks
-  const {
-    control,
-    handleSubmit,
-    formState: { isSubmitting, isValid, errors },
-    reset,
-  } = useForm({
-    defaultValues: defaults as UpdateRoleRequest,
+  /* ------------------------------ Form ------------------------------ */
+  const { control, handleSubmit, formState, reset, setError } = useForm<UpdateRoleRequest>({
+    defaultValues,
     resolver: zodResolver(UpdateRoleSchema),
     mode: 'onChange',
   });
 
-  // Form State Hooks
-  const disabled = isLoading || isSubmitting;
+  useEffect(() => {
+    reset(defaultValues as UpdateRoleRequest);
+  }, [defaultValues, reset]);
+
+  // Prefetch the roles page
+  useEffect(() => {
+    router.prefetch('/roles');
+  }, [router]);
+
+  /* ------------------------------ Keys ------------------------------ */
+  const { isSubmitting, isValid, errors } = formState;
+  const disabled = isUpdating || isSubmitting || isTransitionPending;
   const isAdmin = useWatch({ control, name: 'isAdmin' });
 
-  // Reset Form
-  useEffect(() => reset(defaults as UpdateRoleRequest), [defaults, reset]);
+  /* ------------------------------ Submit ------------------------------ */
+  const submitForm = async (values: UpdateRoleRequest) => {
+    try {
+      startTransition(async () => {
+        await submit(values);
+        router.replace(`/roles`);
+      });
+    } catch (error) {
+      const map = parseApiErrors(error);
+      applyFormErrors(setError, map);
+    }
+  };
 
-  // Render
+  /* ------------------------------ Render ------------------------------ */
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <Stack gap={6}>
@@ -112,7 +124,7 @@ export function RoleUpdateForm({ uuid, userRole }: RoleUpdateFormProps) {
         </Grid>
 
         <PermissionField
-          name="permissions"
+          name="permissionIds"
           control={control}
           disabled={(disabled || isAdmin) ?? false}
           userRole={userRole}

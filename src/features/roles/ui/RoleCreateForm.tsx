@@ -5,15 +5,15 @@ import { useRouter } from 'next/navigation';
 import { Column, Form, Grid, Stack } from '@carbon/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useTransition } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
 import type { CreateRoleRequest, Role, RoleWithPermissions } from '@idoeasy/contracts';
 
-import { useRoleUpsert } from '@/features/roles/hooks/useRoleUpsert';
+import { useRoleCreate } from '@/features/roles/hooks/useRoles';
 import { PermissionField, RolesField, SubmitForm, TextField } from '@/shared/components';
 import { ToggleField } from '@/shared/components/Forms/ToggleField';
-import { isRequired } from '@/shared/helpers';
+import { applyFormErrors, isRequired, parseApiErrors } from '@/shared/helpers';
 import { useRoleValidationSchemas } from '@/shared/validations/roles.validation';
 
 type RoleCreateFormProps = {
@@ -22,40 +22,46 @@ type RoleCreateFormProps = {
 
 export function RoleCreateForm({ userRole }: RoleCreateFormProps) {
   const router = useRouter();
+
+  /* ------------------------------ Hooks ------------------------------ */
   const t = useTranslations('roles');
-  const { defaults, submit, isLoading } = useRoleUpsert();
+  const [isTransitionPending, startTransition] = useTransition();
+  const { defaultValues, submit, isCreating } = useRoleCreate();
   const { CreateRoleSchema } = useRoleValidationSchemas();
 
-  const submitForm = async (values: CreateRoleRequest) => {
-    const response = await submit(values);
-    const role = response?.data as Role;
-    router.replace(`/roles/${role.id}`);
-  };
-
-  const {
-    control,
-    handleSubmit,
-    formState: { isSubmitting, isValid, errors },
-    reset,
-  } = useForm<CreateRoleRequest>({
-    defaultValues: defaults,
+  const { control, handleSubmit, formState, reset, setError } = useForm<CreateRoleRequest>({
+    defaultValues,
     resolver: zodResolver(CreateRoleSchema),
     mode: 'onChange',
   });
 
-  const disabled = isLoading || isSubmitting;
+  useEffect(() => {
+    reset(defaultValues as CreateRoleRequest);
+  }, [defaultValues, reset]);
+
+  /* ------------------------------ Keys ------------------------------ */
+  const { isSubmitting, isValid, errors } = formState;
+  const disabled = isCreating || isSubmitting || isTransitionPending;
   const isAdmin = useWatch({ control, name: 'isAdmin' });
 
-  useEffect(() => {
-    reset(defaults as CreateRoleRequest);
-  }, [defaults, reset]);
+  /* ------------------------------ Submit ------------------------------ */
+  const submitForm = async (values: CreateRoleRequest) => {
+    try {
+      startTransition(async () => {
+        const response = await submit(values);
+        const role = response?.data as Role;
+        router.replace(`/roles/${role.id}`);
+      });
+    } catch (error) {
+      const map = parseApiErrors(error);
+      applyFormErrors(setError, map);
+    }
+  };
 
-  // Render the form
+  /* ------------------------------ Render ------------------------------ */
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <Stack gap={6}>
-        {/* {!!submitError && <InlineNotification kind="error" title="Failed" subtitle={submitError} />} */}
-
         <Grid style={{ gap: '0.5rem' }} fullWidth condensed>
           <Column sm={4} md={8} lg={8}>
             <TextField
@@ -122,7 +128,7 @@ export function RoleCreateForm({ userRole }: RoleCreateFormProps) {
         </Grid>
 
         <PermissionField
-          name="permissions"
+          name="permissionIds"
           control={control}
           disabled={(disabled || isAdmin) ?? false}
           userRole={userRole}
