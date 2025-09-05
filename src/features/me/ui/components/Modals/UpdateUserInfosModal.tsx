@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 
-import { Button, Form, ModalBody, ModalFooter, ModalHeader } from '@carbon/react';
+import { Button, Form, ModalBody, ModalFooter, ModalHeader, Stack } from '@carbon/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
@@ -20,6 +20,7 @@ export type UpdateUserInfosModalProps = {
 
 export function UpdateUserInfosModal({ currentUser, onClosed }: UpdateUserInfosModalProps) {
   const router = useRouter();
+
   const t = useTranslations('profile.changeUserInfos');
   const { defaults, mutation } = useUpdateUserInfos({ currentUser });
   const { UpdateUserInfosSchema } = useMeValidationSchemas();
@@ -49,8 +50,6 @@ export function UpdateUserInfosModal({ currentUser, onClosed }: UpdateUserInfosM
       );
 
       router.refresh();
-    } catch {
-      // (mutation.isError e mutation.error?.message já cuidam do UI)
     } finally {
       submittingRef.current = false;
     }
@@ -59,46 +58,50 @@ export function UpdateUserInfosModal({ currentUser, onClosed }: UpdateUserInfosM
   const disabled = isSubmitting || mutation.isPending;
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} id="updateUserInfosForm">
+    <>
       <ModalHeader closeModal={onClosed}>
         <h2 className="cds--type-heading-02">{t('title')}</h2>
         <p className="cds--type-body-01">{t('description')}</p>
       </ModalHeader>
 
-      <ModalBody>
-        <TextField
-          name="name"
-          labelText={t('name.label')}
-          placeholder={t('name.placeholder')}
-          control={control}
-          errors={errors}
-          disabled={disabled}
-          required={isRequired(UpdateUserInfosSchema, 'name')}
-        />
+      <ModalBody hasForm>
+        <Form onSubmit={handleSubmit(onSubmit)} id="updateUserInfosForm" noValidate>
+          <Stack gap={4}>
+            <TextField
+              name="name"
+              labelText={t('name.label')}
+              placeholder={t('name.placeholder')}
+              control={control}
+              errors={errors}
+              disabled={disabled}
+              required={isRequired(UpdateUserInfosSchema, 'name')}
+            />
 
-        <TextField
-          name="email"
-          labelText={t('email.label')}
-          placeholder={t('email.placeholder')}
-          control={control}
-          errors={errors}
-          disabled={disabled}
-          required={isRequired(UpdateUserInfosSchema, 'email')}
-        />
+            <TextField
+              name="email"
+              labelText={t('email.label')}
+              placeholder={t('email.placeholder')}
+              control={control}
+              errors={errors}
+              disabled={disabled}
+              required={isRequired(UpdateUserInfosSchema, 'email')}
+            />
+          </Stack>
+        </Form>
       </ModalBody>
 
       <ModalFooter>
         <Button kind="secondary" size="lg" onClick={onClosed}>
           {t('cancel')}
         </Button>
-
         <SubmitButton
+          form="updateUserInfosForm"
           isSubmitting={isSubmitting}
           isValid={isValid}
           label={t('save')}
           loadingLabel={t('loading')}
         />
       </ModalFooter>
-    </Form>
+    </>
   );
 }

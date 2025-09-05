@@ -15,6 +15,8 @@ export interface CountryFieldProps {
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  direction?: 'top' | 'bottom';
 }
 
 export function CountryField({
@@ -26,6 +28,8 @@ export function CountryField({
   placeholder,
   required = false,
   disabled,
+  size = 'md',
+  direction = 'bottom',
 }: CountryFieldProps) {
   const { countries } = useCountries();
   const fieldError = errors?.[name];
@@ -57,7 +61,8 @@ export function CountryField({
             invalid={!!fieldError}
             invalidText={(fieldError?.message as string) || undefined}
             disabled={disabled}
-            size="lg"
+            size={size}
+            direction={direction}
             shouldFilterItem={({ item, inputValue }) =>
               (item as Country).name.common.toLowerCase().includes((inputValue ?? '').toLowerCase())
             }

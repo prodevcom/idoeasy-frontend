@@ -19,6 +19,8 @@
     },
     "breadcrumbs": {
         "dash": "Dashboard",
+        "u": "Platform",
+        "events": "Events",
         "users": "Users",
         "roles": "Roles",
         "permissions": "Permissions",
@@ -111,7 +113,9 @@
             "showTimezoneOffset": {
                 "label": "Show Timezone Offset",
                 "required": "Show Timezone Offset is required"
-            }
+            },
+            "errorTitle": "Error",
+            "errorGeneric": "An error occurred while updating your preferences. Please try again."
         }
     },
     "permissions": {
@@ -303,5 +307,23 @@
         },
         "loading": "Loading...",
         "authenticated": "Redirecting..."
+    },
+    "components": {
+        "locale": {
+            "label": "Language / Locale",
+            "placeholder": "Select a locale",
+            "helperText": "Choose your preferred language and region format"
+        },
+        "timeZone": {
+            "label": "Timezone",
+            "placeholder": "Select a timezone",
+            "helperText": "Choose your preferred timezone"
+        },
+        "showTimezoneOffset": {
+            "label": "Show Timezone Offset",
+            "labelA": "Hide",
+            "labelB": "Show",
+            "labelText": "Show timezone offset"
+        }
     }
 }

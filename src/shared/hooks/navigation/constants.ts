@@ -1,5 +1,4 @@
 import {
-  AddAlt,
   Calendar,
   Dashboard,
   LicenseDraft,
@@ -27,6 +26,15 @@ export const NAV_ITEMS: NavOptions[] = [
   { permission: '#', divider: true, translateKey: '' },
 
   {
+    permission: 'my-account.events.read',
+    label: 'My Events',
+    href: '/u/events',
+    icon: Calendar,
+    alwaysShow: true,
+    translateKey: 'my-events',
+  },
+
+  {
     permission: 'my-account.check-in.read',
     label: 'Check-in',
     href: '/u/check-in',
@@ -36,25 +44,9 @@ export const NAV_ITEMS: NavOptions[] = [
   },
 
   {
-    permission: 'my-account.events.create',
-    label: 'Create Event',
-    href: '/u/create-event',
-    icon: AddAlt,
-    alwaysShow: true,
-    translateKey: 'create-event',
-  },
-  {
-    permission: 'my-account.events.read',
-    label: 'My Events',
-    href: '/u/events',
-    icon: Calendar,
-    alwaysShow: true,
-    translateKey: 'my-events',
-  },
-  {
-    permission: 'my-account.bank-transfer.read',
+    permission: 'my-account.balance.read',
     label: 'Balance',
-    href: '/u/bank-transfer',
+    href: '/u/balance',
     icon: Money,
     badge: {
       value: 'R$ 1.5k',

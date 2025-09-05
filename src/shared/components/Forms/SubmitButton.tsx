@@ -1,35 +1,29 @@
-import { Button, Loading } from '@carbon/react';
+'use client';
 
-import type { ButtonKind, ButtonSize } from '@carbon/react';
+import { Button, type ButtonProps } from '@carbon/react';
 
-type SubmitButtonProps = {
+type BaseProps = {
   isSubmitting: boolean;
   isValid: boolean;
   label: string;
   loadingLabel?: string;
-  size?: ButtonSize;
-  kind?: ButtonKind;
 };
 
-export const SubmitButton = ({
+/** Merge Carbon's button props (rendering a <button>) with our custom props */
+export type SubmitButtonProps = BaseProps & ButtonProps<'button'>;
+
+export function SubmitButton({
   isSubmitting,
   isValid,
   label,
-  loadingLabel,
-  size = 'lg',
-  kind = 'primary',
-}: SubmitButtonProps) => {
+  loadingLabel = 'Saving…',
+  type = 'submit', // default submit
+  disabled,
+  ...rest
+}: SubmitButtonProps) {
   return (
-    <Button
-      kind={kind}
-      size={size}
-      type="submit"
-      disabled={isSubmitting || !isValid}
-      renderIcon={(props) =>
-        isSubmitting ? <Loading small withOverlay={false} {...props} /> : null
-      }
-    >
-      {isSubmitting ? (loadingLabel ?? 'Loading') : label}
+    <Button type={type} disabled={disabled ?? (isSubmitting || !isValid)} {...rest}>
+      {isSubmitting ? loadingLabel : label}
     </Button>
   );
-};
+}

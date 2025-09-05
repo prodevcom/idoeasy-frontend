@@ -4,23 +4,22 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import {
   Button,
-  ComboBox,
   Form,
   InlineNotification,
   ModalBody,
   ModalFooter,
   ModalHeader,
   Stack,
-  Toggle,
 } from '@carbon/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import type { UserPreferences } from '@idoeasy/contracts';
 
-import { getSupportedLocales, getSupportedTimeZones } from '@/shared/helpers/preferences';
+import { LocaleField, SubmitButton, TimeZoneField, ToggleField } from '@/shared/components';
+import { isRequired } from '@/shared/helpers';
 import { useMeValidationSchemas } from '@/shared/validations';
 
 import { useUpdateUserPreferences } from '../../../hooks/useUserPreferences';
@@ -34,21 +33,19 @@ export function PreferencesModal({ onClosed }: PreferencesModalProps) {
   const pathname = usePathname();
 
   const t = useTranslations('profile.preferences');
+  const tComponents = useTranslations('components');
   const { mutation, defaults } = useUpdateUserPreferences();
   const { UpdatePreferencesSchema } = useMeValidationSchemas();
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<UserPreferences>({
     defaultValues: defaults,
     resolver: zodResolver(UpdatePreferencesSchema),
     mode: 'onChange',
   });
-
-  const supportedLocales = getSupportedLocales();
-  const supportedTimeZones = getSupportedTimeZones();
 
   const submittingRef = useRef(false);
 
@@ -101,119 +98,78 @@ export function PreferencesModal({ onClosed }: PreferencesModalProps) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} id="preferencesForm">
+    <>
       <ModalHeader closeModal={onClosed}>
         <h2 className="cds--type-heading-02">{t('title')}</h2>
         <p className="cds--type-body-01">{t('description')}</p>
       </ModalHeader>
 
       <ModalBody style={{ minHeight: 300 }}>
-        <Stack gap={6}>
-          {mutation.isError && (
-            <InlineNotification
-              kind="error"
-              title="Error"
-              subtitle={mutation.error?.message || 'Failed to update preferences'}
-              lowContrast
-            />
-          )}
-
-          <Controller
-            control={control}
-            name="locale"
-            rules={{ required: 'Locale is required' }}
-            render={({ field: { onChange, value } }) => {
-              const selectedLocale = supportedLocales.find((loc) => loc.value === value);
-              return (
-                <ComboBox
-                  id="locale"
-                  titleText="Language / Locale"
-                  helperText="Choose your preferred language and region format"
-                  placeholder="Type to search languages..."
-                  items={supportedLocales}
-                  itemToString={(item) => (item ? item.label : '')}
-                  selectedItem={selectedLocale || null}
-                  onChange={({ selectedItem }) => {
-                    onChange(selectedItem ? selectedItem.value : value);
-                  }}
-                  invalid={!!errors.locale}
-                  invalidText={errors.locale?.message}
-                  direction="bottom"
-                  size="md"
-                />
-              );
-            }}
-          />
-
-          <Controller
-            control={control}
-            name="timeZone"
-            rules={{ required: 'Timezone is required' }}
-            render={({ field: { onChange, value } }) => {
-              const selectedTimeZone = supportedTimeZones.find((tz) => tz.value === value);
-              return (
-                <ComboBox
-                  id="timeZone"
-                  titleText="Timezone"
-                  helperText="Choose your timezone for date and time display"
-                  placeholder="Type city name or timezone..."
-                  items={supportedTimeZones}
-                  itemToString={(item) => (item ? item.label : '')}
-                  selectedItem={selectedTimeZone || null}
-                  onChange={({ selectedItem }) => {
-                    onChange(selectedItem ? selectedItem.value : value); // Keep current value if null
-                  }}
-                  invalid={!!errors.timeZone}
-                  invalidText={errors.timeZone?.message}
-                  direction="bottom"
-                  size="md"
-                />
-              );
-            }}
-          />
-
-          <Controller
-            control={control}
-            name="showTimezoneOffset"
-            render={({ field: { onChange, value } }) => (
-              <Toggle
-                id="showTimezoneOffset"
-                labelText="Show timezone offset"
-                labelA="Hide"
-                labelB="Show"
-                toggled={value}
-                onToggle={onChange}
-                size="md"
+        <Form onSubmit={handleSubmit(onSubmit)} id="preferencesForm">
+          <Stack gap={6}>
+            {mutation.isError && (
+              <InlineNotification
+                kind="error"
+                title={t('errorTitle')}
+                subtitle={mutation.error?.message || t('errorGeneric')}
+                lowContrast
               />
             )}
-          />
 
-          <div
-            style={{
-              marginTop: '1rem',
-              padding: '1rem',
-              backgroundColor: '#f4f4f4',
-              borderRadius: '4px',
-            }}
-          >
-            <p style={{ fontSize: '0.875rem', color: '#525252', margin: 0 }}>{t('disclaimer')}</p>
-          </div>
-        </Stack>
+            <LocaleField
+              name="locale"
+              control={control}
+              errors={errors}
+              required={isRequired(UpdatePreferencesSchema, 'locale')}
+              disabled={mutation.isPending || isSubmitting}
+            />
+
+            <TimeZoneField
+              name="timeZone"
+              control={control}
+              errors={errors}
+              required={isRequired(UpdatePreferencesSchema, 'timeZone')}
+              disabled={mutation.isPending || isSubmitting}
+            />
+
+            <ToggleField
+              name="showTimezoneOffset"
+              control={control}
+              label={{
+                labelA: tComponents('showTimezoneOffset.labelA'),
+                labelB: tComponents('showTimezoneOffset.labelB'),
+              }}
+              labelText={tComponents('showTimezoneOffset.label')}
+              required={isRequired(UpdatePreferencesSchema, 'showTimezoneOffset')}
+              disabled={mutation.isPending || isSubmitting}
+            />
+
+            <div
+              style={{
+                marginTop: '1rem',
+                padding: '1rem',
+                backgroundColor: '#f4f4f4',
+                borderRadius: '4px',
+              }}
+            >
+              <p style={{ fontSize: '0.875rem', color: '#525252', margin: 0 }}>{t('disclaimer')}</p>
+            </div>
+          </Stack>
+        </Form>
       </ModalBody>
 
       <ModalFooter>
         <Button kind="secondary" size="lg" onClick={onClosed}>
           {t('cancel')}
         </Button>
-        <Button
-          kind="primary"
-          size="lg"
-          type="submit"
-          disabled={mutation.isPending || isSubmitting}
-        >
-          {t('save')}
-        </Button>
+        <SubmitButton
+          form="preferencesForm"
+          isSubmitting={isSubmitting}
+          isValid={isValid}
+          label={t('save')}
+          loadingLabel={t('loading')}
+        />
       </ModalFooter>
-    </Form>
+    </>
   );
 }

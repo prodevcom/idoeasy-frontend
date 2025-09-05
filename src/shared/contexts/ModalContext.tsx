@@ -1,55 +1,72 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+// ModalProvider.tsx
+'use client';
 
-// Types for the modal context
+import { ComposedModal } from '@carbon/react';
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
+
 interface ModalContextType {
   isOpen: boolean;
-  openModal: (component: ReactNode, props?: Record<string, unknown>) => void;
+  openModal: (node: ReactNode) => void; // no per-modal props
   closeModal: () => void;
-  modalContent: ReactNode | null;
-  modalProps: Record<string, unknown> | undefined;
 }
 
-// Create the context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-// Provider component
-interface ModalProviderProps {
-  children: ReactNode;
-}
-
-export function ModalProvider({ children }: ModalProviderProps) {
+export function ModalProvider({ children }: { children: ReactNode }) {
+  const [isClient, setIsClient] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactNode | null>(null);
-  const [modalProps, setModalProps] = useState<Record<string, unknown> | undefined>(undefined);
+  const [content, setContent] = useState<ReactNode | null>(null);
 
-  const openModal = (component: ReactNode, props?: Record<string, unknown>) => {
-    setModalContent(component);
-    setModalProps(props);
-    setIsOpen(true);
+  useEffect(() => setIsClient(true), []);
+
+  const container = useMemo(() => {
+    if (typeof document === 'undefined') return null;
+    let el = document.getElementById('modal-root');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'modal-root';
+      document.body.appendChild(el);
+    }
+    return el;
+  }, []);
+
+  const openModal = (node: ReactNode) => {
+    setContent(node);
+    // Ensure the modal is already mounted before flipping to open on next tick.
+    requestAnimationFrame(() => setIsOpen(true));
   };
 
   const closeModal = () => {
+    // Close (animation plays). You can clear content after close if you want.
     setIsOpen(false);
-    setModalContent(null);
-    setModalProps(undefined);
   };
 
-  const value: ModalContextType = {
-    isOpen,
-    openModal,
-    closeModal,
-    modalContent,
-    modalProps,
-  };
+  const ctx: ModalContextType = { isOpen, openModal, closeModal };
 
-  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
+  return (
+    <ModalContext.Provider value={ctx}>
+      {children}
+
+      {/* keep the modal mounted after client boot; only toggle `open` */}
+      {isClient && container
+        ? createPortal(
+            <ComposedModal
+              open={isOpen}
+              onClose={closeModal} // ESC/overlay/close button
+              preventCloseOnClickOutside={false}
+            >
+              {content}
+            </ComposedModal>,
+            container,
+          )
+        : null}
+    </ModalContext.Provider>
+  );
 }
 
-// Hook to use the modal context
-export function useModalContext(): ModalContextType {
-  const context = useContext(ModalContext);
-  if (context === undefined) {
-    throw new Error('useModalContext must be used within a ModalProvider');
-  }
-  return context;
+export function useModalContext() {
+  const v = useContext(ModalContext);
+  if (!v) throw new Error('useModalContext must be used within a ModalProvider');
+  return v;
 }

@@ -43,6 +43,7 @@ export function AppHeader({ user, isSideNavExpanded, onClickSideNavExpand }: App
         aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
         onClick={onClickSideNavExpand}
         isActive={isSideNavExpanded}
+        isCollapsible
       />
 
       {/* Logo */}
@@ -90,7 +91,11 @@ export function AppHeader({ user, isSideNavExpanded, onClickSideNavExpand }: App
       </HeaderGlobalBar>
 
       {/* SideNav */}
-      <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+      <SideNav
+        aria-label="Side navigation"
+        expanded={isSideNavExpanded}
+        onOverlayClick={onClickSideNavExpand}
+      >
         <AppSideNav user={user} onClickSideNavExpand={onClickSideNavExpand} />
       </SideNav>
     </Header>

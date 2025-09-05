@@ -19,6 +19,8 @@
     },
     "breadcrumbs": {
         "dash": "Painel",
+        "u": "Plataforma",
+        "events": "Eventos",
         "users": "Usuários",
         "roles": "Funções",
         "permissions": "Permissões",
@@ -111,7 +113,9 @@
             "showTimezoneOffset": {
                 "label": "Mostrar Deslocamento do Fuso Horário",
                 "required": "Mostrar Deslocamento do Fuso Horário é obrigatório"
-            }
+            },
+            "errorTitle": "Erro",
+            "errorGeneric": "Ocorreu um erro ao atualizar suas preferências. Por favor, tente novamente."
         }
     },
     "permissions": {
@@ -300,5 +304,23 @@
         },
         "loading": "Carregando...",
         "redirecting": "Redirecionando..."
+    },
+    "components": {
+        "locale": {
+            "label": "Idioma / Locale",
+            "placeholder": "Selecione um idioma",
+            "helperText": "Escolha seu idioma preferido e formato de região"
+        },
+        "timeZone": {
+            "label": "Fuso Horário",
+            "placeholder": "Selecione um fuso horário",
+            "helperText": "Escolha seu fuso horário preferido"
+        },
+        "showTimezoneOffset": {
+            "label": "Mostrar Deslocamento do Fuso Horário",
+            "labelA": "Ocultar",
+            "labelB": "Mostrar",
+            "labelText": "Mostrar deslocamento do fuso horário"
+        }
     }
 }

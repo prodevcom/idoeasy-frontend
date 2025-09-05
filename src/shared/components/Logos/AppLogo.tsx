@@ -20,6 +20,8 @@ const HEIGHTS: Record<LOGO_SIZE, number> = {
   [LOGO_SIZE.LARGE]: 45,
 };
 
+const INTRINSIC = { width: 300, height: 50 };
+
 export function AppLogo({
   href,
   standalone = false,
@@ -32,8 +34,8 @@ export function AppLogo({
     <Image
       src="/assets/logo-vertical-01.svg"
       alt="iDoEasy"
-      width={0} // required by TS, but we'll override with CSS
-      height={height} // fixed height
+      width={INTRINSIC.width} // required by TS, but we'll override with CSS
+      height={INTRINSIC.height} // fixed height
       priority={priority}
       style={{ height, width: 'auto' }} // width auto keeps aspect ratio
     />

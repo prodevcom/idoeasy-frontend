@@ -13,6 +13,7 @@ type CreateUserProps = {
 
 export default function CreateUserPage(_: CreateUserProps) {
   const t = useTranslations('users');
+
   return (
     <Stack gap={4}>
       <Stack gap={3}>
@@ -20,6 +21,7 @@ export default function CreateUserPage(_: CreateUserProps) {
         <p className="cds--type-label-01">{t('titles.createDescription')}</p>
       </Stack>
 
+      {/* ------------------------------ User Form ------------------------------ */}
       <UserCreateForm />
     </Stack>
   );
